@@ -9,7 +9,10 @@ def main():
 
   sns.set_theme(style='darkgrid')
   plot_pie_chart(df_order_payments)
-  plot_payments_by_month(df_order_payments, df_orders)
+
+  df = merge_df(df_order_payments, df_orders)
+  plot_line_chart(df)
+  plot_box_plot(df)
 
 def plot_pie_chart(df_order_payments):
   df_payment_type = df_order_payments['payment_type'].value_counts()
@@ -21,11 +24,14 @@ def plot_pie_chart(df_order_payments):
     ※**boleto**: an official form of payment regulated by the Central Bank of Brazil that uses vouchers to pay
   """
 
-def plot_payments_by_month(df_order_payments, df_orders):
+def merge_df(df_order_payments, df_orders):
   df = df_order_payments.copy()
   df = pd.merge(df, df_orders[['order_id', 'order_purchase_timestamp']], on='order_id', how='left')
   df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
   df['order_purchase_timestamp'] = df['order_purchase_timestamp'].dt.strftime('%Y/%m')
+  return df
+
+def plot_line_chart(df):
   df_counts = df.groupby(['order_purchase_timestamp', 'payment_type']). \
     size().unstack(fill_value=0)
 
@@ -42,6 +48,15 @@ def plot_payments_by_month(df_order_payments, df_orders):
 
   # Display plot in Streamlit
   st.title('Evolution of Payment Type')
+  st.pyplot(plt.gcf())
+
+def plot_box_plot(df):
+  plt.figure(figsize=(10, 5))
+  sns.boxplot(data=df, x='payment_type', y='payment_value')
+  plt.yscale('log')
+  plt.xlabel('Payment Type')
+  plt.ylabel('Price (Log)')
+  st.title('Order Price by Payment Type')
   st.pyplot(plt.gcf())
 
 
