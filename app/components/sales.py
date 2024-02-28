@@ -1,11 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
 from dataloader import load_csv_files
-
-sns.set_theme(style="dark")
 
 
 def display_sales(state=""):
