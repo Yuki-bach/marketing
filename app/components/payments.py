@@ -1,10 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 import streamlit as st
 from dataloader import load_csv_files
-
-sns.set_theme(style="darkgrid")
 
 
 # main function
@@ -93,7 +90,9 @@ def __plot_line_chart(df):
 
 def __plot_box_plot(df):
     plt.figure(figsize=(10, 5))
-    sns.boxplot(data=df, x="payment_type", y="payment_value")
+    payment_types = df["payment_type"].unique()
+    payment_values = [df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types]
+    plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")
     plt.xlabel("Payment Type")
     plt.ylabel("Price (Log)")

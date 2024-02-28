@@ -1,10 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import streamlit as st
 from dataloader import load_csv_files
-
-sns.set_theme(style="darkgrid")
 
 
 # main function

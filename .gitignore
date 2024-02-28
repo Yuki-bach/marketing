@@ -3,3 +3,6 @@
 
 # __pycache__ directory for streamlit
 __pycache__/
+
+# virtualenv
+env/
