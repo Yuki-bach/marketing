@@ -2,12 +2,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import streamlit as st
+from dataloader import load_csv_files
+
+sns.set_theme(style='darkgrid')
 
 def main():
-  df_order_payments = pd.read_csv('datasets/olist_order_payments_dataset.csv')
-  df_orders = pd.read_csv('datasets/olist_orders_dataset.csv')
+  df_dict = load_csv_files()
+  df_order_payments = df_dict['df_order_payments']
+  df_orders = df_dict['df_orders']
 
-  sns.set_theme(style='darkgrid')
   plot_pie_chart(df_order_payments)
 
   df = merge_df(df_order_payments, df_orders)

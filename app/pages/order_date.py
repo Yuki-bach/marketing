@@ -2,12 +2,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+from dataloader import load_csv_files
+
+sns.set_theme(style='darkgrid')
 
 def main():
-  df_orders = pd.read_csv('datasets/olist_orders_dataset.csv')
+  df_dict = load_csv_files()
+  df_orders = df_dict['df_orders']
   df_orders['order_purchase_timestamp'] = pd.to_datetime(df_orders['order_purchase_timestamp'])
 
-  sns.set_theme(style='darkgrid')
   plot_order_date(df_orders)
   plot_per_weekday(df_orders)
   plot_order_per_time_of_day(df_orders)

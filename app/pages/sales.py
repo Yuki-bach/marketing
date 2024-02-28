@@ -3,17 +3,20 @@ import pandas as pd
 import seaborn as sns
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
+from dataloader import load_csv_files
+
+sns.set_theme(style='dark')
 
 def main():
   df = get_df()
-
-  sns.set_theme(style='dark')
   plot_sales(df)
 
 def get_df():
-  df_order_payments = pd.read_csv('datasets/olist_order_payments_dataset.csv')
-  df_orders = pd.read_csv('datasets/olist_orders_dataset.csv')
+  df_dict = load_csv_files()
+  df_order_payments = df_dict['df_order_payments']
+  df_orders = df_dict['df_orders']
   df_orders['order_purchase_timestamp'] = pd.to_datetime(df_orders['order_purchase_timestamp'])
+
   df = pd.merge(
     df_orders[["order_id", "order_purchase_timestamp"]],
     df_order_payments[["order_id" ,"payment_value"]],
