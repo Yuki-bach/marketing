@@ -1,8 +1,10 @@
 ## DAT494 - Capstone Project
-
 - Customer Segmentation
 - Dataset: Brazilian E-Commerce Public Dataset by Olist
 - https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+## EDA Dashboard
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dat490-marketing.streamlit.app/)
 
 ## Git Cheat Sheet for Team Collaboration
 
