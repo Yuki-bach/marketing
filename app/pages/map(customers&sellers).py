@@ -1,13 +1,18 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+from dataloader import load_csv_files
 
 def main():
   # Load data
   df_state_coords = pd.read_csv('datasets/state_coords.csv')
   df_zip_coords = load_zip_coordinates()
-  df_customers = load_customers()
-  df_sellers = load_sellers()
+
+  df_dict = load_csv_files()
+  df_customers = df_dict['df_customers'].copy()
+  df_sellers = df_dict['df_sellers'].copy()
+  df_customers = rename_customers(df_customers)
+  df_sellers = rename_sellers(df_sellers)
 
   # Create 4 dataframes
   df_customers_state = merge_df(df_customers, df_state_coords, "state")
@@ -30,16 +35,14 @@ def load_zip_coordinates():
     reset_index()
   return df_zip_coords
 
-def load_customers():
-  df_customers = pd.read_csv('datasets/olist_customers_dataset.csv')
+def rename_customers(df_customers):
   df_customers.rename(
     columns={ 'customer_state': 'state', 'customer_zip_code_prefix': 'zip' },
     inplace=True
   )
   return df_customers
 
-def load_sellers():
-  df_sellers = pd.read_csv('datasets/olist_sellers_dataset.csv')
+def rename_sellers(df_sellers):
   df_sellers.rename(
     columns={ 'seller_state': 'state', 'seller_zip_code_prefix': 'zip' },
     inplace=True
@@ -92,11 +95,11 @@ def display_map(df_counts, on, color):
   # mouse over
   title = "State" if on == "state" else "Zip Code Prefix"
   tooltip = {
-      "html": f"<b>{title}</b> {{on}}<br><b>Count:</b> {{count}}",
-      "style": {
-        "backgroundColor": color["name"],
-        "color": "white"
-      }
+    "html": f"<b>{title}</b> {{{on}}}<br><b>Count:</b> {{count}}",
+    "style": {
+      "backgroundColor": color["name"],
+      "color": "white"
+    }
   }
   # Initial view state
   view_state = pdk.ViewState(

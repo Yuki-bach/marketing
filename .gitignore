@@ -1,2 +1,5 @@
 # Jupyter notebook checkpoints
 *-checkpoint.ipynb
+
+# __pycache__ directory for streamlit
+__pycache__/
