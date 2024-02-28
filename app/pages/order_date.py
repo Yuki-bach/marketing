@@ -1,11 +1,13 @@
-import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+import streamlit as st
 
 def main():
   df_orders = pd.read_csv('datasets/olist_orders_dataset.csv')
   df_orders['order_purchase_timestamp'] = pd.to_datetime(df_orders['order_purchase_timestamp'])
 
+  sns.set_theme(style='darkgrid')
   plot_order_date(df_orders)
   plot_per_weekday(df_orders)
   plot_order_per_time_of_day(df_orders)
@@ -17,7 +19,7 @@ def plot_order_date(df_orders):
 
   # Create plot
   plt.figure(figsize=(10, 5))
-  plt.plot(df_counts.index, df_counts.values)
+  plt.plot(df_counts.index, df_counts.values, lw=4)
   plt.xticks(rotation=45)
   plt.xlabel('Date')
   plt.ylabel('Count')

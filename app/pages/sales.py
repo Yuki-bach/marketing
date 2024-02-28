@@ -1,10 +1,13 @@
-import streamlit as st
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 import pandas as pd
+import seaborn as sns
+import streamlit as st
+from matplotlib.ticker import FuncFormatter
 
 def main():
   df = get_df()
+  
+  sns.set_theme(style='dark')
   plot_sales(df)
 
 def get_df():
@@ -30,8 +33,8 @@ def plot_sales(df):
   # line chart for "payment_value"
   ax1.plot(df_total_sales.index, df_total_sales.values, label='Total Sales', color="#03A9F4")
   ax1.set_xlabel('Date')
-  ax1.set_ylabel('Total Sales')
-  ax1.tick_params(axis='y', labelcolor="#03A9F4")
+  ax1.set_ylabel('Total Sales', color="#03A9F4")
+  ax1.tick_params(axis='y')
 
   # Customize y-axis to display in thousands
   def thousands_formatter(x, pos):
@@ -47,8 +50,8 @@ def plot_sales(df):
   # bar chart for "order_purchase_timestamp"
   ax2 = ax1.twinx()
   ax2.bar(df_counts.index, df_counts.values, alpha=0.5, label='Counts', color='purple')
-  ax2.set_ylabel('Counts')
-  ax2.tick_params(axis='y', labelcolor='purple')
+  ax2.set_ylabel('Counts', color='purple')
+  ax2.tick_params(axis='y')
   total_count = df_counts.values.sum()
   max_count = df_counts.values.max()
   for i, v in enumerate(df_counts.values):
