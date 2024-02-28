@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
-def display_map(df, df_state_coords):
+def display_map(df, df_state_coords, color):
   # Merge the data with the coordinates
   df_counts = df.state.value_counts().reset_index()
   df_counts.columns = ['state', 'count']
@@ -15,7 +15,7 @@ def display_map(df, df_state_coords):
     df_counts,
     get_position=["lon", "lat"],
     get_radius=f"count * {radius_coef}",
-    get_color=[180, 0, 200, 140],
+    get_color=color["RGBA"],
     pickable=True,
     opacity=0.8,
   )
@@ -23,7 +23,7 @@ def display_map(df, df_state_coords):
   tooltip = {
     "html": "<b>State:</b> {state}<br><b>Count:</b> {count}",
     "style": {
-      "backgroundColor": "purple",
+      "backgroundColor": color["name"],
       "color": "white"
     }
   }
@@ -49,11 +49,19 @@ def main():
   with tab1:
     df_customers = pd.read_csv('datasets/olist_customers_dataset.csv')
     df_customers.rename(columns={'customer_state': 'state'}, inplace=True)
-    display_map(df_customers, df_state_coords)
+    color = {
+      "name": "purple",
+      "RGBA": [180, 0, 200, 140]
+    }
+    display_map(df_customers, df_state_coords, color)
   with tab2:
     df_sellers = pd.read_csv('datasets/olist_sellers_dataset.csv')
     df_sellers.rename(columns={'seller_state': 'state'}, inplace=True)
-    display_map(df_sellers, df_state_coords)
+    color = {
+      "name": "green",
+      "RGBA": [0, 200, 0, 140]
+    }
+    display_map(df_sellers, df_state_coords, color)
 
 if __name__ == '__main__':
   main()
