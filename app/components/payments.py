@@ -6,7 +6,7 @@ from dataloader import load_csv_files
 
 sns.set_theme(style='darkgrid')
 
-def main():
+def display_payments():
   df_dict = load_csv_files()
   df_order_payments = df_dict['df_order_payments'].copy()
   df_orders = df_dict['df_orders'].copy()
@@ -60,7 +60,3 @@ def plot_box_plot(df):
   plt.ylabel('Price (Log)')
   st.title('Order Price by Payment Type')
   st.pyplot(plt.gcf())
-
-
-if __name__ == '__main__':
-  main()

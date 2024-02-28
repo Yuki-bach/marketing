@@ -6,7 +6,7 @@ from dataloader import load_csv_files
 
 sns.set_theme(style='darkgrid')
 
-def main():
+def display_order_date():
   df_dict = load_csv_files()
   df_orders = df_dict['df_orders'].copy()
 
@@ -85,7 +85,3 @@ def plot_order_per_time_of_day(df_orders):
     "Time Range": ["0:00 - 5:59", "6:00 - 11:59", "12:00 - 17:59", "18:00 - 23:59"]
   })
   st.table(time_of_day_df)
-
-
-if __name__ == '__main__':
-  main()

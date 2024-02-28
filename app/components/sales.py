@@ -7,7 +7,7 @@ from dataloader import load_csv_files
 
 sns.set_theme(style='dark')
 
-def main():
+def display_sales():
   df = get_df()
   plot_sales(df)
 
@@ -72,7 +72,3 @@ def plot_sales(df):
   # Display plot in Streamlit
   st.title('Total Sales')
   st.pyplot(plt.gcf())
-
-
-if __name__ == '__main__':
-  main()
