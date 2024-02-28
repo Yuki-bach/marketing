@@ -9,8 +9,8 @@ def main():
   df_zip_coords = load_zip_coordinates()
 
   df_dict = load_csv_files()
-  df_customers = df_dict['df_customers']
-  df_sellers = df_dict['df_sellers']
+  df_customers = df_dict['df_customers'].copy()
+  df_sellers = df_dict['df_sellers'].copy()
   df_customers = rename_customers(df_customers)
   df_sellers = rename_sellers(df_sellers)
 
@@ -95,11 +95,11 @@ def display_map(df_counts, on, color):
   # mouse over
   title = "State" if on == "state" else "Zip Code Prefix"
   tooltip = {
-      "html": f"<b>{title}</b> {{{on}}}<br><b>Count:</b> {{count}}",
-      "style": {
-        "backgroundColor": color["name"],
-        "color": "white"
-      }
+    "html": f"<b>{title}</b> {{{on}}}<br><b>Count:</b> {{count}}",
+    "style": {
+      "backgroundColor": color["name"],
+      "color": "white"
+    }
   }
   # Initial view state
   view_state = pdk.ViewState(

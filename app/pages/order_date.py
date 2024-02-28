@@ -8,8 +8,7 @@ sns.set_theme(style='darkgrid')
 
 def main():
   df_dict = load_csv_files()
-  df_orders = df_dict['df_orders']
-  df_orders['order_purchase_timestamp'] = pd.to_datetime(df_orders['order_purchase_timestamp'])
+  df_orders = df_dict['df_orders'].copy()
 
   plot_order_date(df_orders)
   plot_per_weekday(df_orders)

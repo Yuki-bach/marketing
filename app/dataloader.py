@@ -18,5 +18,10 @@ def load_csv_files():
   df_dict = {}
   for key, path in csv_files.items():
     df_dict[key] = pd.read_csv(path)
-    
+
+  # Convert order_purchase_timestamp to datetime
+  df_dict['df_orders']['order_purchase_timestamp'] = pd.to_datetime(
+    df_dict['df_orders']['order_purchase_timestamp']
+  )
+
   return df_dict

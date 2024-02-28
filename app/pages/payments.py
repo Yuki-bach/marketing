@@ -8,8 +8,8 @@ sns.set_theme(style='darkgrid')
 
 def main():
   df_dict = load_csv_files()
-  df_order_payments = df_dict['df_order_payments']
-  df_orders = df_dict['df_orders']
+  df_order_payments = df_dict['df_order_payments'].copy()
+  df_orders = df_dict['df_orders'].copy()
 
   plot_pie_chart(df_order_payments)
 
@@ -30,7 +30,6 @@ def plot_pie_chart(df_order_payments):
 def merge_df(df_order_payments, df_orders):
   df = df_order_payments.copy()
   df = pd.merge(df, df_orders[['order_id', 'order_purchase_timestamp']], on='order_id', how='left')
-  df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
   df['order_purchase_timestamp'] = df['order_purchase_timestamp'].dt.strftime('%Y/%m')
   return df
 

@@ -15,7 +15,6 @@ def get_df():
   df_dict = load_csv_files()
   df_order_payments = df_dict['df_order_payments']
   df_orders = df_dict['df_orders']
-  df_orders['order_purchase_timestamp'] = pd.to_datetime(df_orders['order_purchase_timestamp'])
 
   df = pd.merge(
     df_orders[["order_id", "order_purchase_timestamp"]],
