@@ -10,6 +10,7 @@ def display_sales(state=""):
 
     st.title(f'Total Sales {"in " + state if state else ""}')
     __plot_sales(df)
+    __show_sales_metrics(df)
 
 
 def __get_df(state=""):
@@ -39,14 +40,12 @@ def __get_df(state=""):
 
 def __plot_sales(df):
     df_tmp = df.copy()
-    df_tmp["order_purchase_timestamp"] = (
-        df_tmp["order_purchase_timestamp"].dt.strftime("%Y/%m")
+    df_tmp["order_purchase_timestamp"] = df_tmp["order_purchase_timestamp"].dt.strftime(
+        "%Y/%m"
     )
     df_counts = df_tmp["order_purchase_timestamp"].value_counts().sort_index()
     df_total_sales = (
-        df_tmp.groupby("order_purchase_timestamp")["payment_value"]
-        .sum()
-        .sort_index()
+        df_tmp.groupby("order_purchase_timestamp")["payment_value"].sum().sort_index()
     )
 
     _, ax1 = plt.subplots(figsize=(20, 10))
@@ -76,8 +75,7 @@ def __plot_sales(df):
     # bar chart for "order_purchase_timestamp"
     ax2 = ax1.twinx()
     ax2.bar(
-        df_counts.index, df_counts.values, alpha=0.5,
-        label="Counts", color="purple"
+        df_counts.index, df_counts.values, alpha=0.5, label="Counts", color="purple"
     )
     ax2.set_ylabel("Counts", color="purple")
     ax2.tick_params(axis="y")
@@ -89,9 +87,7 @@ def __plot_sales(df):
     offset_percent = max_value * 0.01
     total_count = df_counts.values.sum()
     for i, v in enumerate(df_counts.values):
-        plt.text(
-            i, v + offset_value, str(v), ha="center", va="bottom", fontsize=14
-        )
+        plt.text(i, v + offset_value, str(v), ha="center", va="bottom", fontsize=14)
         plt.text(
             i,
             v + offset_percent,
@@ -109,3 +105,24 @@ def __plot_sales(df):
 
     # Display plot in Streamlit
     st.pyplot(plt.gcf())
+
+
+def __show_sales_metrics(df):
+    total_sales_2017 = df.query(
+        "'2017-01-01' <= order_purchase_timestamp <= '2017-8-31'"
+    )["payment_value"].sum()
+    total_sales_2018 = df.query(
+        "'2018-01-01' <= order_purchase_timestamp <= '2018-8-31'"
+    )["payment_value"].sum()
+
+    total_sales_2017_formatted = "R${:,.0f}".format(total_sales_2017)
+    total_sales_2018_formatted = "R${:,.0f}".format(total_sales_2018)
+    st.metric(
+        label="Total Sales in 2017 between January and August",
+        value=total_sales_2017_formatted,
+    )
+    st.metric(
+        label="Total Sales in 2018 between January and August",
+        value=total_sales_2018_formatted,
+        delta=f"{total_sales_2018 / total_sales_2017 * 100:.2f}%",
+    )
