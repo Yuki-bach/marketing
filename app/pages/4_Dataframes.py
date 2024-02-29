@@ -6,6 +6,7 @@ from dataloader import load_csv_files
 def main():
     df_dict = load_csv_files()
 
+    st.balloons()
     st.title("DataFrames")
     display_df_shapes(df_dict)
     display_dfs(df_dict)
