@@ -25,7 +25,6 @@ def main():
         # Set button
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
-            st.write(f"Displaying sales for {state}")
             display_order_date(state)
             display_sales(state)
             display_payments(state)
@@ -39,7 +38,6 @@ def main():
         # Set button
         submit_button = st.button("Show Charts", key="states_btn")
         if submit_button:
-            st.write(f"Displaying sales for {selected_states}")
             display_order_date_by_states(selected_states)
 
 
