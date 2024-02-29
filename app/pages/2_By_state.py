@@ -25,6 +25,7 @@ def main():
         # Set button
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
+            st.toast(f"State name: {state}", icon="🇧🇷")
             display_order_date(state)
             display_sales(state)
             display_payments(state)
@@ -38,6 +39,7 @@ def main():
         # Set button
         submit_button = st.button("Show Charts", key="states_btn")
         if submit_button:
+            st.toast(f"State names: {', '.join(selected_states)}", icon="🇧🇷")
             display_order_date_by_states(selected_states)
 
 
