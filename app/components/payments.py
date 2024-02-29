@@ -20,6 +20,7 @@ def display_payments(state=""):
 
     st.title(f'Evolution of Payment Type {"in " + state if state else ""}')
     __plot_line_chart(df)
+    __show_credit_card_metrics(df)
 
     st.title(f'Order Price by Payment Type {"in " + state if state else ""}')
     __plot_box_plot(df)
@@ -57,9 +58,7 @@ def __merge_df(df_order_payments, df_orders):
         on="order_id",
         how="left",
     )
-    df["order_purchase_timestamp"] = (
-        df["order_purchase_timestamp"].dt.strftime("%Y/%m")
-    )
+    df["order_purchase_timestamp"] = df["order_purchase_timestamp"].dt.strftime("%Y/%m")
     return df
 
 
@@ -74,12 +73,7 @@ def __plot_line_chart(df):
 
     # Plot a line for each payment type
     for payment_type in df_counts.columns:
-        plt.plot(
-            df_counts.index,
-            df_counts[payment_type],
-            lw=2,
-            label=payment_type
-        )
+        plt.plot(df_counts.index, df_counts[payment_type], lw=2, label=payment_type)
 
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -88,10 +82,34 @@ def __plot_line_chart(df):
     st.pyplot(plt.gcf())
 
 
+def __show_credit_card_metrics(df):
+    df_tmp = df.copy()
+    df_tmp["order_purchase_timestamp"] = pd.to_datetime(df_tmp["order_purchase_timestamp"])
+    df_tmp = df_tmp[df_tmp["payment_type"] == "credit_card"]
+    total_count_2017 = df_tmp.query(
+        "'2017-01-01' <= order_purchase_timestamp <= '2017-8-31'"
+    ).shape[0]
+    total_count_2018 = df_tmp.query(
+        "'2018-01-01' <= order_purchase_timestamp <= '2018-8-31'"
+    ).shape[0]
+
+    st.metric(
+        label="Total count of Credit Card Usage in 2017 between January and August",
+        value=total_count_2017,
+    )
+    st.metric(
+        label="Total count of Credit Card Usage in 2018 between January and August",
+        value=total_count_2018,
+        delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
+    )
+
+
 def __plot_box_plot(df):
     plt.figure(figsize=(10, 5))
     payment_types = df["payment_type"].unique()
-    payment_values = [df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types]
+    payment_values = [
+        df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types
+    ]
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")
     plt.xlabel("Payment Type")

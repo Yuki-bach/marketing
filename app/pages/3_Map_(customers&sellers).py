@@ -21,6 +21,7 @@ def main():
     df_sellers_state = merge_df(df_sellers, df_state_coords, "state")
     df_sellers_zip = merge_df(df_sellers, df_zip_coords, "zip")
 
+    st.title("Geolocation of Customers and Sellers")
     display_maps(
         df_customers_state, df_customers_zip, df_sellers_state, df_sellers_zip
     )
