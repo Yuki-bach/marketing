@@ -103,5 +103,4 @@ def __plot_bar_chart_order_count_by_product_category(df):
     plt.ylabel("Product Category")
 
     # streamlit
-    st.title("Order Count by Product Category")
     st.pyplot(plt.gcf())
