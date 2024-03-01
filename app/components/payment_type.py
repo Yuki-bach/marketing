@@ -5,7 +5,7 @@ from dataloader import load_csv_files
 
 
 # main function
-def display_payments(state=""):
+def display_payment_type(state=""):
     # Load data
     df_dict = load_csv_files()
     df_order_payments = df_dict["df_order_payments"].copy()
@@ -44,10 +44,13 @@ def __plot_pie_chart(df_order_payments):
     plt.figure(figsize=(6, 3))
     plt.pie(df_payment_type, labels=df_payment_type.index, autopct="%1.1f%%")
     st.pyplot(plt.gcf())
-    """
-      ※**boleto**: an official form of payment regulated by the Central Bank of
-      Brazil that uses vouchers to pay
-    """
+    with st.container(border=True):
+        st.markdown(
+            """
+            **boleto**: an official form of payment regulated by the Central Bank of
+            Brazil that uses vouchers to pay
+            """
+        )
 
 
 def __merge_df(df_order_payments, df_orders):
@@ -84,7 +87,9 @@ def __plot_line_chart(df):
 
 def __show_credit_card_metrics(df):
     df_tmp = df.copy()
-    df_tmp["order_purchase_timestamp"] = pd.to_datetime(df_tmp["order_purchase_timestamp"])
+    df_tmp["order_purchase_timestamp"] = pd.to_datetime(
+        df_tmp["order_purchase_timestamp"]
+    )
     df_tmp = df_tmp[df_tmp["payment_type"] == "credit_card"]
     total_count_2017 = df_tmp.query(
         "'2017-01-01' <= order_purchase_timestamp <= '2017-8-31'"
@@ -93,15 +98,16 @@ def __show_credit_card_metrics(df):
         "'2018-01-01' <= order_purchase_timestamp <= '2018-8-31'"
     ).shape[0]
 
-    st.metric(
-        label="Total count of Credit Card Usage in 2017 between January and August",
-        value=total_count_2017,
-    )
-    st.metric(
-        label="Total count of Credit Card Usage in 2018 between January and August",
-        value=total_count_2018,
-        delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
-    )
+    with st.container(border=True):
+        st.metric(
+            label="Total count of Credit Card Usage in 2017 between January and August",
+            value=total_count_2017,
+        )
+        st.metric(
+            label="Total count of Credit Card Usage in 2018 between January and August",
+            value=total_count_2018,
+            delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
+        )
 
 
 def __plot_box_plot(df):
@@ -110,6 +116,16 @@ def __plot_box_plot(df):
     payment_values = [
         df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types
     ]
+
+    box = plt.boxplot(
+        payment_values, labels=payment_types, vert=True, patch_artist=True
+    )
+
+    # Set color of boxes
+    colors = ["blue", "orange", "green", "red", "gray"]
+    for i, patch in enumerate(box["boxes"]):
+        patch.set_facecolor(colors[i])
+
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")
     plt.xlabel("Payment Type")

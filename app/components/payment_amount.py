@@ -1,0 +1,70 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
+from dataloader import load_csv_files
+
+
+def display_payment_amount(state=""):
+    # Load data
+    df_dict = load_csv_files()
+    df = df_dict["df_order_payments"].copy()
+    df = df[["order_id", "payment_value"]]
+
+    if state:
+        df = __filter_df(df_dict, df, state)
+
+    # Display charts
+    st.title(f'Payment Amount {"in " + state if state else ""}')
+    need_slider = state == ""
+    __display_histogram(df, slider=need_slider)
+    __display_box_plot(df)
+
+
+def __filter_df(df_dict, df, state):
+    df_orders = df_dict["df_orders"]
+    df_customers = df_dict["df_customers"]
+    df = pd.merge(
+        df,
+        df_orders[["order_id", "customer_id"]],
+        on="order_id",
+        how="left",
+    )
+    df = pd.merge(
+        df,
+        df_customers[["customer_id", "customer_state"]],
+        on="customer_id",
+        how="left",
+    )
+    df = df[df["customer_state"] == state]
+    df.drop(columns=["customer_id", "customer_state"], inplace=True)
+    return df
+
+
+def __display_histogram(df, slider):
+    if slider:
+        bins = st.slider(
+            "Select the number of bins", min_value=1, max_value=50, value=10
+        )
+    else:
+        bins = 30
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(df["payment_value"], bins=bins, edgecolor="k", color="purple")
+    plt.xlabel("Payment Value")
+    plt.ylabel("Frequency")
+    plt.title("Payment Value Distribution")
+
+    st.pyplot(plt)
+
+
+def __display_box_plot(df):
+    plt.figure(figsize=(10, 2))
+    box = plt.boxplot(df["payment_value"], vert=False, patch_artist=True)
+    box["boxes"][0].set_facecolor("purple")  # Set color of box
+
+    plt.xscale("log")  # Set the x-axis to a logarithmic scale
+    plt.xlabel("Payment Value (Log Scale)")  # Update the x-axis label
+    plt.title("Box Plot of Payment Value")
+
+    # Display the box plot
+    st.pyplot(plt.gcf())

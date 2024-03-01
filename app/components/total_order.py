@@ -5,7 +5,7 @@ from dataloader import load_csv_files
 
 
 # main function
-def display_order_date(state=""):
+def display_total_order(state=""):
     # Load data
     df_dict = load_csv_files()
     df_orders = df_dict["df_orders"].copy()
