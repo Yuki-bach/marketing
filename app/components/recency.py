@@ -13,14 +13,20 @@ def display_recency():
     df_recency = get_df_recency(df_orders, df_customers)
 
     # streamlit
-    col1, col2, _ = st.columns([3, 1, 1])
+    col1, col2 = st.columns([5, 2])
     with col1:
         st.write("Recency Dataframe:")
         st.dataframe(df_recency, height=320)
     with col2:
         st.write("Recency Stats:")
         st.write(df_recency.Recency.describe())
-
+    code = """
+            # How to calculate Recency
+            df_recency["Recency"] = (
+                df_recency["LatestPurchaseDate"].max() - df_recency["LatestPurchaseDate"]
+            ).dt.days
+      """
+    st.code(code, language="python")
     __display_histogram(df_recency)
 
 
@@ -37,11 +43,11 @@ def get_df_recency(df_orders, df_customers):
         .max()
         .reset_index()
     )
-    df_recency.columns = ["customer_unique_id", "MaxPurchaseDate"]
+    df_recency.columns = ["customer_unique_id", "LatestPurchaseDate"]
 
     # Calculate Recency
     df_recency["Recency"] = (
-        df_recency["MaxPurchaseDate"].max() - df_recency["MaxPurchaseDate"]
+        df_recency["LatestPurchaseDate"].max() - df_recency["LatestPurchaseDate"]
     ).dt.days
 
     return df_recency

@@ -13,7 +13,7 @@ def display_frequency():
     df_frequency = get_df_frequency(df_orders, df_customers)
 
     # Display charts
-    col1, col2, _ = st.columns([3, 1, 1])
+    col1, col2, _ = st.columns([4, 2, 1])
     with col1:
         st.write("Frequency Dataframe:")
         st.dataframe(df_frequency, height=320)
