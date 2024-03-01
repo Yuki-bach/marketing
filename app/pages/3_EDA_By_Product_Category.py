@@ -1,6 +1,6 @@
 import streamlit as st
 from components.review_score import display_review_score, display_order_count_by_product_category
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 def main():

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 def display_total_sales_by_state():
