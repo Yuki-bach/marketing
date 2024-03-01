@@ -1,6 +1,8 @@
 import streamlit as st
+import os
 import pandas as pd
 import pydeck as pdk
+from PIL import Image
 from dataloader import load_csv_files
 
 
@@ -22,16 +24,12 @@ def main():
     df_sellers_zip = merge_df(df_sellers, df_zip_coords, "zip")
 
     st.title("Geolocation of Customers and Sellers")
-    display_maps(
-        df_customers_state, df_customers_zip, df_sellers_state, df_sellers_zip
-    )
+    display_maps(df_customers_state, df_customers_zip, df_sellers_state, df_sellers_zip)
 
 
 def load_zip_coordinates():
     df_zip_coords = pd.read_csv("datasets/olist_geolocation_dataset.csv")
-    df_zip_coords.dropna(
-        subset=["geolocation_state", "geolocation_city"], inplace=True
-    )
+    df_zip_coords.dropna(subset=["geolocation_state", "geolocation_city"], inplace=True)
     df_zip_coords.rename(
         columns={
             "geolocation_zip_code_prefix": "zip",
@@ -41,8 +39,7 @@ def load_zip_coordinates():
         inplace=True,
     )
     df_zip_coords = (
-        df_zip_coords.groupby("zip")
-        .agg({"lat": "mean", "lon": "mean"}).reset_index()
+        df_zip_coords.groupby("zip").agg({"lat": "mean", "lon": "mean"}).reset_index()
     )
     return df_zip_coords
 
@@ -57,8 +54,7 @@ def rename_customers(df_customers):
 
 def rename_sellers(df_sellers):
     df_sellers.rename(
-        columns={"seller_state": "state", "seller_zip_code_prefix": "zip"},
-        inplace=True
+        columns={"seller_state": "state", "seller_zip_code_prefix": "zip"}, inplace=True
     )
     return df_sellers
 
@@ -72,7 +68,7 @@ def merge_df(df, df_coords, key):
 def display_maps(
     df_customers_state, df_customers_zip, df_sellers_state, df_sellers_zip
 ):
-    tab1, tab2 = st.tabs(["Customers", "Sellers"])
+    tab1, tab2, tab3 = st.tabs(["Customers", "Sellers", "Population Distribution"])
 
     with tab1:
         color = {"name": "purple", "RGBA": [180, 0, 200, 140]}
@@ -98,11 +94,19 @@ def display_maps(
         else:
             display_map(df_sellers_zip, "zip", color)
 
+    with tab3:
+        script_dir = os.path.dirname(__file__)
+        rel_path = "../images/population_map.png"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        image = Image.open(abs_file_path)
+        st.image(
+            image,
+            caption="Population Distribution in 2022 (http://www.geo-ref.net/ph/bra.htm)"
+        )
+
 
 def display_map(df_counts, on, color):
-    radius_coef = (
-        (500_000 if on == "state" else 100_000) / df_counts["count"].max()
-    )
+    radius_coef = (500_000 if on == "state" else 100_000) / df_counts["count"].max()
     layer = pdk.Layer(
         "ScatterplotLayer",
         df_counts,
@@ -125,9 +129,7 @@ def display_map(df_counts, on, color):
         zoom=3,
         pitch=0,
     )
-    r = pdk.Deck(
-        layers=[layer], initial_view_state=view_state, tooltip=tooltip
-    )
+    r = pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip)
     st.pydeck_chart(r)
 
     # Display the data
