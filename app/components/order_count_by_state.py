@@ -14,7 +14,7 @@ def display_order_count_by_state():
     __plot(df_customers_by_state)
 
     # streamlit
-    st.title("Data by Customer State")
+    st.header("Order Count by Customer State")
     col1, col2 = st.columns([3, 1])
     with col1:
         st.pyplot(plt.gcf())
