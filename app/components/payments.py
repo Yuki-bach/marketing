@@ -93,15 +93,16 @@ def __show_credit_card_metrics(df):
         "'2018-01-01' <= order_purchase_timestamp <= '2018-8-31'"
     ).shape[0]
 
-    st.metric(
-        label="Total count of Credit Card Usage in 2017 between January and August",
-        value=total_count_2017,
-    )
-    st.metric(
-        label="Total count of Credit Card Usage in 2018 between January and August",
-        value=total_count_2018,
-        delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
-    )
+    with st.container(border=True):
+        st.metric(
+            label="Total count of Credit Card Usage in 2017 between January and August",
+            value=total_count_2017,
+        )
+        st.metric(
+            label="Total count of Credit Card Usage in 2018 between January and August",
+            value=total_count_2018,
+            delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
+        )
 
 
 def __plot_box_plot(df):

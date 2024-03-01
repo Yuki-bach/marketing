@@ -117,12 +117,13 @@ def __show_sales_metrics(df):
 
     total_sales_2017_formatted = "R${:,.0f}".format(total_sales_2017)
     total_sales_2018_formatted = "R${:,.0f}".format(total_sales_2018)
-    st.metric(
-        label="Total Sales in 2017 between January and August",
-        value=total_sales_2017_formatted,
-    )
-    st.metric(
-        label="Total Sales in 2018 between January and August",
-        value=total_sales_2018_formatted,
-        delta=f"{total_sales_2018 / total_sales_2017 * 100:.2f}%",
-    )
+    with st.container(border=True):
+        st.metric(
+            label="Total Sales in 2017 between January and August",
+            value=total_sales_2017_formatted,
+        )
+        st.metric(
+            label="Total Sales in 2018 between January and August",
+            value=total_sales_2018_formatted,
+            delta=f"{total_sales_2018 / total_sales_2017 * 100:.2f}%",
+        )
