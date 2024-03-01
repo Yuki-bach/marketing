@@ -5,16 +5,16 @@ from components.sales import display_sales
 from components.order_date import display_order_date
 from components.order_date_by_states import display_order_date_by_states
 from components.payments import display_payments
+from components.ordered_product_category import display_ordered_product_category
+from components.order_count_by_state import display_order_count_by_state
 
 
 def main():
     # Load data
     df_dict = load_csv_files()
     df_customers = df_dict["df_customers"]
-    df_customers_by_state = df_customers["customer_state"].value_counts().reset_index()
 
-    st.title("Data by Customer State")
-    st.dataframe(df_customers_by_state, height=200)
+    display_order_count_by_state()
 
     tab1, tab2 = st.tabs(["State", "Several States"])
     with tab1:
@@ -26,6 +26,7 @@ def main():
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
             st.toast(f"State name: {state}", icon="🇧🇷")
+            display_ordered_product_category(state)
             display_order_date(state)
             display_sales(state)
             display_payments(state)
