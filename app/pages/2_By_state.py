@@ -2,9 +2,9 @@ import streamlit as st
 
 from dataloader import load_csv_files
 from components.sales import display_sales
-from components.order_date import display_order_date
-from components.order_date_by_states import display_order_date_by_states
-from components.payments import display_payments
+from components.order_date import display_total_order
+from components.order_date_by_states import display_total_order_by_states
+from components.payment_type import display_payment_type
 from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
@@ -27,11 +27,11 @@ def main():
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
             st.toast(f"State name: {state}", icon="🇧🇷")
-            display_payment_amount(state)
-            display_ordered_product_category(state)
-            display_order_date(state)
             display_sales(state)
-            display_payments(state)
+            display_total_order(state)
+            display_ordered_product_category(state)
+            display_payment_amount(state)
+            display_payment_type(state)
     with tab2:
         # Set multiselect
         states = df_customers["customer_state"].unique()
@@ -43,7 +43,7 @@ def main():
         submit_button = st.button("Show Charts", key="states_btn")
         if submit_button:
             st.toast(f"State names: {', '.join(selected_states)}", icon="🇧🇷")
-            display_order_date_by_states(selected_states)
+            display_total_order_by_states(selected_states)
 
 
 if __name__ == "__main__":

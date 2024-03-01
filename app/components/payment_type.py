@@ -5,7 +5,7 @@ from dataloader import load_csv_files
 
 
 # main function
-def display_payments(state=""):
+def display_payment_type(state=""):
     # Load data
     df_dict = load_csv_files()
     df_order_payments = df_dict["df_order_payments"].copy()
