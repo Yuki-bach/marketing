@@ -75,9 +75,13 @@ def __plot_sales(df):
     # bar chart for "order_purchase_timestamp"
     ax2 = ax1.twinx()
     ax2.bar(
-        df_counts.index, df_counts.values, alpha=0.5, label="Counts", color="purple"
+        df_counts.index,
+        df_counts.values,
+        alpha=0.5,
+        label="Order Counts",
+        color="purple",
     )
-    ax2.set_ylabel("Counts", color="purple")
+    ax2.set_ylabel("Order Counts", color="purple")
     ax2.tick_params(axis="y")
 
     # label for bar chart
