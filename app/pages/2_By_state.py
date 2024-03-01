@@ -7,6 +7,7 @@ from components.order_date_by_states import display_order_date_by_states
 from components.payments import display_payments
 from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
+from components.payment_amount import display_payment_amount
 
 
 def main():
@@ -26,6 +27,7 @@ def main():
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
             st.toast(f"State name: {state}", icon="🇧🇷")
+            display_payment_amount(state)
             display_ordered_product_category(state)
             display_order_date(state)
             display_sales(state)
