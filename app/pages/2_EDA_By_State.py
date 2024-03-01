@@ -8,6 +8,7 @@ from components.payment_type import display_payment_type
 from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
+from components.total_sales_by_state import display_total_sales_by_state
 from utils.set_favicon import set_favicon
 
 
@@ -18,6 +19,7 @@ def main():
     df_customers = df_dict["df_customers"]
 
     display_order_count_by_state()
+    display_total_sales_by_state()
 
     tab1, tab2 = st.tabs(["State", "Several States"])
     with tab1:
