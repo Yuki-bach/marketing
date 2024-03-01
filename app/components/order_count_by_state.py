@@ -14,7 +14,7 @@ def display_order_count_by_state():
     __plot(df_customers_by_state)
 
     # streamlit
-    st.title("Data by Customer State")
+    st.header("Order Count by Customer State")
     col1, col2 = st.columns([3, 1])
     with col1:
         st.pyplot(plt.gcf())
@@ -27,7 +27,7 @@ def __plot(df_customers_by_state):
     df_customers_by_state.plot(kind="bar", color="skyblue")
     plt.xticks(rotation=45)
     plt.xlabel("Customer State")
-    plt.ylabel("Count")
+    plt.ylabel("Order Count")
     plt.grid(axis="y", linestyle="--", alpha=0.7)
     plt.show()
     # memo: I tried to use st.bar_chart, but the state is alphabetically sorted.
