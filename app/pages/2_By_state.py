@@ -20,7 +20,6 @@ def main():
     with tab1:
         # Set selectbox
         states = df_customers["customer_state"].unique()
-        print(states)
         state = st.selectbox("Choose the state for plotting:", states, key="state_box")
 
         # Set button
