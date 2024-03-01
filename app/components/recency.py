@@ -25,35 +25,31 @@ def display_recency():
 
 
 def get_df_recency(df_orders, df_customers):
+    df_tmp = pd.merge(
+        df_orders[["customer_id", "order_purchase_timestamp"]],
+        df_customers[["customer_id", "customer_unique_id"]],
+        on="customer_id",
+    )
     # Get the last purchase date for each customer
-    df_max_purchase = (
-        df_orders[["order_id", "customer_id", "order_purchase_timestamp"]]
-        .groupby("customer_id")["order_purchase_timestamp"]
+    df_recency = (
+        df_tmp[["customer_unique_id", "order_purchase_timestamp"]]
+        .groupby("customer_unique_id")["order_purchase_timestamp"]
         .max()
         .reset_index()
     )
-    df_max_purchase.columns = ["customer_id", "MaxPurchaseDate"]
+    df_recency.columns = ["customer_unique_id", "MaxPurchaseDate"]
 
     # Calculate Recency
-    df_max_purchase["Recency"] = (
-        df_max_purchase["MaxPurchaseDate"].max() - df_max_purchase["MaxPurchaseDate"]
+    df_recency["Recency"] = (
+        df_recency["MaxPurchaseDate"].max() - df_recency["MaxPurchaseDate"]
     ).dt.days
-
-    # Merge with the customers dataframe
-    df_user = pd.DataFrame(df_customers["customer_id"])
-    df_recency = pd.merge(
-        df_user,
-        df_max_purchase[["customer_id", "Recency"]],
-        on="customer_id",
-        how="left",
-    )
 
     return df_recency
 
 
 def __display_histogram(df):
     bins = st.slider(
-        "Select the number of bins", min_value=1, max_value=50, value=10
+        "Select the number of bins", min_value=1, max_value=50, value=10, key="recency"
     )
 
     plt.figure(figsize=(10, 6))

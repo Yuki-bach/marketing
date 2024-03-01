@@ -44,10 +44,13 @@ def __plot_pie_chart(df_order_payments):
     plt.figure(figsize=(6, 3))
     plt.pie(df_payment_type, labels=df_payment_type.index, autopct="%1.1f%%")
     st.pyplot(plt.gcf())
-    """
-      ※**boleto**: an official form of payment regulated by the Central Bank of
-      Brazil that uses vouchers to pay
-    """
+    with st.container(border=True):
+        st.markdown(
+            """
+            **boleto**: an official form of payment regulated by the Central Bank of
+            Brazil that uses vouchers to pay
+            """
+        )
 
 
 def __merge_df(df_order_payments, df_orders):
@@ -121,7 +124,7 @@ def __plot_box_plot(df):
     # Set color of boxes
     colors = ["blue", "orange", "green", "red", "gray"]
     for i, patch in enumerate(box["boxes"]):
-        patch.set_facecolor(colors[i]) 
+        patch.set_facecolor(colors[i])
 
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")
