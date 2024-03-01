@@ -27,7 +27,7 @@ def __plot(df_customers_by_state):
     df_customers_by_state.plot(kind="bar", color="skyblue")
     plt.xticks(rotation=45)
     plt.xlabel("Customer State")
-    plt.ylabel("Count")
+    plt.ylabel("Order Count")
     plt.grid(axis="y", linestyle="--", alpha=0.7)
     plt.show()
     # memo: I tried to use st.bar_chart, but the state is alphabetically sorted.
