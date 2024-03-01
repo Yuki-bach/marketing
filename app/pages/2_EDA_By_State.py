@@ -8,9 +8,11 @@ from components.payment_type import display_payment_type
 from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
+from utils.set_favicon import set_favicon
 
 
 def main():
+    set_favicon()
     # Load data
     df_dict = load_csv_files()
     df_customers = df_dict["df_customers"]

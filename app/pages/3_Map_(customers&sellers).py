@@ -4,9 +4,11 @@ import pandas as pd
 import pydeck as pdk
 from PIL import Image
 from utils.dataloader import load_csv_files
+from utils.set_favicon import set_favicon
 
 
 def main():
+    set_favicon()
     # Load data
     df_state_coords = pd.read_csv("datasets/state_coords.csv")
     df_zip_coords = load_zip_coordinates()

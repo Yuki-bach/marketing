@@ -1,9 +1,11 @@
 import pandas as pd
 import streamlit as st
 from utils.dataloader import load_csv_files
+from utils.set_favicon import set_favicon
 
 
 def main():
+    set_favicon()
     df_dict = load_csv_files()
 
     st.balloons()
