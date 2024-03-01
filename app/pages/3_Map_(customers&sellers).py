@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pydeck as pdk
 from PIL import Image
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 def main():
