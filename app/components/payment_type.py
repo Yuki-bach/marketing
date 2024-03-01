@@ -84,7 +84,9 @@ def __plot_line_chart(df):
 
 def __show_credit_card_metrics(df):
     df_tmp = df.copy()
-    df_tmp["order_purchase_timestamp"] = pd.to_datetime(df_tmp["order_purchase_timestamp"])
+    df_tmp["order_purchase_timestamp"] = pd.to_datetime(
+        df_tmp["order_purchase_timestamp"]
+    )
     df_tmp = df_tmp[df_tmp["payment_type"] == "credit_card"]
     total_count_2017 = df_tmp.query(
         "'2017-01-01' <= order_purchase_timestamp <= '2017-8-31'"
@@ -111,6 +113,16 @@ def __plot_box_plot(df):
     payment_values = [
         df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types
     ]
+
+    box = plt.boxplot(
+        payment_values, labels=payment_types, vert=True, patch_artist=True
+    )
+
+    # Set color of boxes
+    colors = ["blue", "orange", "green", "red", "gray"]
+    for i, patch in enumerate(box["boxes"]):
+        patch.set_facecolor(colors[i]) 
+
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")
     plt.xlabel("Payment Type")
