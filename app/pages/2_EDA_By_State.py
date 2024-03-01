@@ -10,6 +10,7 @@ from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
 from components.total_sales_by_state import display_total_sales_by_state
 from utils.set_favicon import set_favicon
+from utils.eda_headers import get_eda_headers
 
 
 def main():
@@ -31,6 +32,7 @@ def main():
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
             st.toast(f"State name: {state}", icon="🇧🇷")
+            toc(state)
             display_sales(state)
             display_total_order(state)
             display_ordered_product_category(state)
@@ -48,6 +50,22 @@ def main():
         if submit_button:
             st.toast(f"State names: {', '.join(selected_states)}", icon="🇧🇷")
             display_total_order_by_states(selected_states)
+
+
+def toc(state):
+    headers = get_eda_headers()
+
+    toc_md = (
+        "<ul>"
+        + "".join(
+            f'<li><a href="#{header["id"]}-in-{state.lower()}">{header["title"]}</a></li>'
+            for header in headers
+        )
+        + "</ul>"
+    )
+    with st.container(border=True):
+        st.subheader("Table of Contents")
+        st.markdown(toc_md, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
