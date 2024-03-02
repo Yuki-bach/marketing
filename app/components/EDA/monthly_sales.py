@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
+from components.captions import cap_total_sales
 from utils.dataloader import load_csv_files
 
 
@@ -10,6 +11,7 @@ def display_sales(state=""):
 
     st.title(f'Total Sales {"in " + state if state else ""}')
     __plot(df)
+    cap_total_sales()
     __show_sales_metrics(df)
 
 

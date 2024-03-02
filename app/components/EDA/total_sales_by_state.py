@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
+from components.captions import cap_total_sales_by_state
 from utils.dataloader import load_csv_files
 
 
@@ -29,6 +30,7 @@ def display_total_sales_by_state():
     # streamlit
     st.subheader("Total Sales by Customer State")
     __plot(total_sales_by_state)
+    cap_total_sales_by_state()
 
 
 def __plot(total_sales_by_state):

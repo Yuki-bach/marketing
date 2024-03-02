@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
+from components.captions import cap_distribution_of_review_score, cap_order_count_by_product_category
 from utils.dataloader import load_csv_files
 
 
@@ -22,6 +23,7 @@ def display_review_score(product_category=""):
         df = df[df["product_category_name_english"] == product_category]
 
     __plot_bar_chart(df, product_category)
+    cap_distribution_of_review_score()
 
 
 def display_order_count_by_product_category():
@@ -37,6 +39,7 @@ def display_order_count_by_product_category():
     )
 
     __plot_bar_chart_order_count_by_product_category(df)
+    cap_order_count_by_product_category()
 
 
 def __merge_df(df_order_reviews, df_order_items, df_products, df_product_category_name):

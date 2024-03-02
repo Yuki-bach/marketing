@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
+from components.captions import cap_top10_ordered_product_categories
 from utils.dataloader import load_csv_files
 
 
@@ -25,6 +26,7 @@ def display_ordered_product_category(state=""):
     st.title(f"Top 10 Ordered Product Categories  {'in ' + state if state else ''}")
     st.write(f"There are {category_num} categories in total.")
     st.pyplot(plt.gcf())
+    cap_top10_ordered_product_categories()
     st.dataframe(counts, height=200)
 
 

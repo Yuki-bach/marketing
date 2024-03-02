@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
+from components.captions import cap_frequency
 from utils.dataloader import load_csv_files
 
 
@@ -21,6 +22,7 @@ def display_frequency():
         st.write("Frequency Stats:")
         st.write(df_frequency.Frequency.describe())
     __display_histogram(df_frequency)
+    cap_frequency()
 
 
 def get_df_frequency(df_orders, df_customers):

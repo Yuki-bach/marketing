@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+from components.captions import cap_map_customers, cap_map_sellers, cap_population_density
 from utils.dataloader import load_csv_files
 from utils.image_utils import get_image
 from utils.set_favicon import set_favicon
@@ -82,6 +83,7 @@ def display_maps(
             display_map(df_customers_state, "state", color)
         else:
             display_map(df_customers_zip, "zip", color)
+        cap_map_customers()
 
     with tab2:
         color = {"name": "green", "RGBA": [0, 200, 0, 140]}
@@ -94,6 +96,7 @@ def display_maps(
             display_map(df_sellers_state, "state", color)
         else:
             display_map(df_sellers_zip, "zip", color)
+        cap_map_sellers()
 
     with tab3:
         image = get_image("../images/population_map.png")
@@ -101,6 +104,7 @@ def display_maps(
             image,
             caption="Population Distribution in 2022 (http://www.geo-ref.net/ph/bra.htm)"
         )
+        cap_population_density()
 
 
 def display_map(df_counts, on, color):
@@ -132,13 +136,23 @@ def display_map(df_counts, on, color):
 
     # Display the data
     if on == "state":
-        st.dataframe(df_counts)
+        selected_state = st.selectbox(
+            "Select a state and see the count",
+            df_counts["state"].unique(),
+            key=f"map_state_box_{color['name']}"  # to be unique key
+        )
+        st.dataframe(df_counts[df_counts["state"] == selected_state])
     else:
         st.write(
             f"Top 10 Zip Code Prefixes (There are {df_counts.shape[0]} unique "
             "zip code prefixes)"
         )
-        st.dataframe(df_counts.head(10))
+        selected_state = st.selectbox(
+            "Select a zip code prefix and see the count",
+            df_counts["zip"].unique(),
+            key=f"map_zip_box_{color['name']}",  # to be unique key
+        )
+        st.dataframe(df_counts[df_counts["zip"] == selected_state])
 
 
 if __name__ == "__main__":

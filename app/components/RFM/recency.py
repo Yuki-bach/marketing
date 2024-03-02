@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
+from components.captions import cap_recency
 from utils.dataloader import load_csv_files
 
 
@@ -28,6 +29,7 @@ def display_recency():
       """
     st.code(code, language="python")
     __display_histogram(df_recency)
+    cap_recency()
 
 
 def get_df_recency(df_orders, df_customers):

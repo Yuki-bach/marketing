@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
+from components.captions import cap_payment_type, cap_evolution_of_payment_type, order_price_by_payment_type
 from utils.dataloader import load_csv_files
 
 
@@ -17,13 +18,16 @@ def display_payment_type(state=""):
     # Display charts
     st.title(f'Payment Type {"in " + state if state else ""}')
     __plot_pie_chart(df_order_payments)
+    cap_payment_type()
 
     st.title(f'Evolution of Payment Type {"in " + state if state else ""}')
     __plot_line_chart(df)
     __show_credit_card_metrics(df)
+    cap_evolution_of_payment_type()
 
     st.title(f'Order Price by Payment Type {"in " + state if state else ""}')
     __plot_box_plot(df)
+    order_price_by_payment_type()
 
 
 def __filter_by_state(df_dict, df_orders, state):
