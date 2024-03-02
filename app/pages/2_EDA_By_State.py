@@ -1,15 +1,15 @@
 import streamlit as st
 
 from utils.dataloader import load_csv_files
-from components.monthly_sales import display_sales
-from components.total_order import display_total_order
-from components.order_date_by_states import display_total_order_by_states
-from components.payment_type import display_payment_type
-from components.ordered_product_category import display_ordered_product_category
-from components.order_count_by_state import display_order_count_by_state
-from components.payment_amount import display_payment_amount
-from components.total_sales_by_state import display_total_sales_by_state
-from components.state_names import display_state_names
+from components.EDA.monthly_sales import display_sales
+from components.EDA.total_order import display_total_order
+from components.EDA.order_date_by_states import display_total_order_by_states
+from components.EDA.payment_type import display_payment_type
+from components.EDA.ordered_product_category import display_ordered_product_category
+from components.EDA.order_count_by_state import display_order_count_by_state
+from components.EDA.payment_amount import display_payment_amount
+from components.EDA.total_sales_by_state import display_total_sales_by_state
+from components.EDA.state_names import display_state_names
 from utils.set_favicon import set_favicon
 from utils.eda_headers import get_eda_headers
 

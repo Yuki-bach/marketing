@@ -1,5 +1,5 @@
 import streamlit as st
-from components.review_score import (
+from components.EDA.review_score import (
     display_review_score,
     display_order_count_by_product_category,
 )
