@@ -1,13 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-from cycler import cycler
 from utils.dataloader import load_csv_files
-
-# Set color cycle for the plot
-plt.rcParams["axes.prop_cycle"] = cycler(
-    color=[plt.get_cmap("Set2")(i) for i in range(9)]
-)
+from components.captions import cap_total_order_per_week, cap_total_order_per_time
 
 
 # main function
@@ -21,9 +16,11 @@ def display_total_order(state=""):
     # Display charts
     st.title(f'Total Order per Weekday {"in " + state if state else ""}')
     __plot_per_weekday(df_orders)
+    cap_total_order_per_week()
 
     st.title(f'Total Order per Time of Day {"in " + state if state else ""}')
     __plot_order_per_time_of_day(df_orders)
+    cap_total_order_per_time()
 
 
 def __filter_by_state(df_dict, df_orders, state):

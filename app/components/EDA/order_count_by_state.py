@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
+from components.captions import cap_order_count_by_customer_state
 from utils.dataloader import load_csv_files
 
 
@@ -17,6 +18,7 @@ def display_order_count_by_state():
     # streamlit
     st.subheader("Order Count by Customer State")
     st.pyplot(plt.gcf())
+    cap_order_count_by_customer_state()
 
 
 def __plot(df_customers_by_state):

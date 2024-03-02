@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+from components.captions import cap_map_customers, cap_map_sellers, cap_population_density
 from utils.dataloader import load_csv_files
 from utils.image_utils import get_image
 from utils.set_favicon import set_favicon
@@ -82,6 +83,7 @@ def display_maps(
             display_map(df_customers_state, "state", color)
         else:
             display_map(df_customers_zip, "zip", color)
+        cap_map_customers()
 
     with tab2:
         color = {"name": "green", "RGBA": [0, 200, 0, 140]}
@@ -94,6 +96,7 @@ def display_maps(
             display_map(df_sellers_state, "state", color)
         else:
             display_map(df_sellers_zip, "zip", color)
+        cap_map_sellers()
 
     with tab3:
         image = get_image("../images/population_map.png")
@@ -101,6 +104,7 @@ def display_maps(
             image,
             caption="Population Distribution in 2022 (http://www.geo-ref.net/ph/bra.htm)"
         )
+        cap_population_density()
 
 
 def display_map(df_counts, on, color):
