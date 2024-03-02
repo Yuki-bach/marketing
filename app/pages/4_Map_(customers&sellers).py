@@ -1,9 +1,8 @@
 import streamlit as st
-import os
 import pandas as pd
 import pydeck as pdk
-from PIL import Image
 from utils.dataloader import load_csv_files
+from utils.image_utils import get_image
 from utils.set_favicon import set_favicon
 
 
@@ -97,10 +96,7 @@ def display_maps(
             display_map(df_sellers_zip, "zip", color)
 
     with tab3:
-        script_dir = os.path.dirname(__file__)
-        rel_path = "../images/population_map.png"
-        abs_file_path = os.path.join(script_dir, rel_path)
-        image = Image.open(abs_file_path)
+        image = get_image("../images/population_map.png")
         st.image(
             image,
             caption="Population Distribution in 2022 (http://www.geo-ref.net/ph/bra.htm)"
