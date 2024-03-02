@@ -2,7 +2,6 @@
 def get_eda_headers():
     headers = [
         {"id": "total-sales", "title": "Total Sales"},
-        {"id": "total-order", "title": "Total Order"},
         {"id": "total-order-per-weekday", "title": "Total Order per Weekday"},
         {"id": "total-order-per-time-of-day", "title": "Total Order per Time of Day"},
         {
