@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-from components.captions import cap_payment_amount, cap_payment_type
+from components.captions import cap_payment_amount
 from utils.dataloader import load_csv_files
 
 
@@ -20,7 +20,6 @@ def display_payment_amount(state=""):
     __display_histogram(df, slider=need_slider)
     cap_payment_amount()
     __display_box_plot(df)
-    cap_payment_type()
 
 
 def __filter_df(df_dict, df, state):

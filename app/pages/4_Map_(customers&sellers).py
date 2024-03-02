@@ -136,13 +136,23 @@ def display_map(df_counts, on, color):
 
     # Display the data
     if on == "state":
-        st.dataframe(df_counts)
+        selected_state = st.selectbox(
+            "Select a state and see the count",
+            df_counts["state"].unique(),
+            key=f"map_state_box_{color['name']}"  # to be unique key
+        )
+        st.dataframe(df_counts[df_counts["state"] == selected_state])
     else:
         st.write(
             f"Top 10 Zip Code Prefixes (There are {df_counts.shape[0]} unique "
             "zip code prefixes)"
         )
-        st.dataframe(df_counts.head(10))
+        selected_state = st.selectbox(
+            "Select a zip code prefix and see the count",
+            df_counts["zip"].unique(),
+            key=f"map_zip_box_{color['name']}",  # to be unique key
+        )
+        st.dataframe(df_counts[df_counts["zip"] == selected_state])
 
 
 if __name__ == "__main__":

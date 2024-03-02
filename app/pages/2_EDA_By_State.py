@@ -20,13 +20,14 @@ def main():
     df_dict = load_csv_files()
     df_customers = df_dict["df_customers"]
 
-    col1, col2 = st.columns([5, 2])
+    col1, col2 = st.columns([4, 1])
     with col1:
         display_order_count_by_state()
         display_total_sales_by_state()
     with col2:
         display_state_names()
 
+    st.subheader("Explore Each State")
     tab1, tab2 = st.tabs(["State", "Several States"])
     with tab1:
         # Set selectbox
