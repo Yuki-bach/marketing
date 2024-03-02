@@ -79,7 +79,7 @@ def __plot_line_chart(df):
         plt.plot(df_counts.index, df_counts[payment_type], lw=2, label=payment_type)
 
     plt.xticks(rotation=45)
-    plt.xlabel("Date")
+    plt.xlabel("Month")
     plt.ylabel("Count")
     plt.legend(title="Payment Type")
     st.pyplot(plt.gcf())
