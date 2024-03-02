@@ -14,6 +14,7 @@ def main():
     st.balloons()
     st.title("DataFrames")
     __display_data_schema()
+    st.write("There are 8 dataframes in this dataset.")
     __display_df_shapes(df_dict)
     __display_dfs(df_dict)
 
@@ -24,7 +25,6 @@ def __display_data_schema():
 
 
 def __display_df_shapes(df_dict):
-    st.write("There are 8 dataframes in this dataset.")
     df_shapes = {df_name: df.shape for df_name, df in df_dict.items()}
     df_shapes = pd.DataFrame(list(df_shapes.items()), columns=["DataFrame", "Shape"])
     st.table(df_shapes)

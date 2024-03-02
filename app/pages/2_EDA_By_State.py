@@ -68,8 +68,7 @@ def toc(state):
         )
         + "</ul>"
     )
-    with st.container(border=True):
-        st.subheader("Table of Contents")
+    with st.expander("Table of Contents", expanded=True):
         st.markdown(toc_md, unsafe_allow_html=True)
 
 

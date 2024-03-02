@@ -28,8 +28,7 @@ def toc():
         f'<li><a href="#{header["id"]}">{header["title"]}</a></li>'
         for header in headers
     ) + "</ul>"
-    with st.container(border=True):
-        st.subheader("Table of Contents")
+    with st.expander("Table of Contents", expanded=True):
         st.markdown(toc_md, unsafe_allow_html=True)
 
 
