@@ -48,7 +48,7 @@ def __display_histogram(df, slider):
     else:
         bins = 30
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 4))
     plt.hist(df["payment_value"], bins=bins, edgecolor="k")
     plt.xlabel("Payment Value")
     plt.ylabel("Frequency")

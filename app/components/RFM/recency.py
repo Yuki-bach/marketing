@@ -58,7 +58,7 @@ def __display_histogram(df):
         "Select the number of bins", min_value=1, max_value=50, value=10, key="recency"
     )
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 4))
     plt.hist(df["Recency"], bins=bins, edgecolor="k")
     plt.xlabel("Recency (days)")
     plt.ylabel("Frequency")

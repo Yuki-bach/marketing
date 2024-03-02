@@ -67,7 +67,7 @@ def __plot_bar_chart(df, product_category):
     review_scores_counts = df["review_score"].value_counts().sort_index()
 
     # matplotlib
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 4))
     plt.bar(review_scores_counts.index, review_scores_counts.values)
     plt.xlabel("Review Score")
     plt.ylabel("Number of Reviews")
@@ -94,7 +94,7 @@ def __plot_bar_chart_order_count_by_product_category(df):
     )
 
     # matplotlib
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 4))
     plt.barh(
         order_count_by_product_category.index[::-1],
         order_count_by_product_category.values[::-1],

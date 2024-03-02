@@ -72,6 +72,7 @@ def __plot_line_chart(ax1, df_total_sales):
         df_total_sales.values,
         label="Total Sales (R$ in millions)",
         color=color1,
+        lw=2,
     )
     ax1.set_xlabel("Month")
     ax1.set_ylabel("Total Sales (R$ in millions)", color=color1)

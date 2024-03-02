@@ -5,8 +5,8 @@ from cycler import cycler
 from utils.dataloader import load_csv_files
 
 # Set color cycle for the plot
-plt.rcParams['axes.prop_cycle'] = cycler(
-    color=[plt.get_cmap('Set2')(i) for i in range(9)]
+plt.rcParams["axes.prop_cycle"] = cycler(
+    color=[plt.get_cmap("Set2")(i) for i in range(9)]
 )
 
 
@@ -60,7 +60,7 @@ def __plot_per_weekday(df_orders):
     )
 
     # Create bar chart
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
     plt.bar(df_week_counts.index, df_week_counts.values)
     plt.xticks(rotation=45)
     plt.xlabel("Week")
@@ -84,9 +84,7 @@ def __plot_order_per_time_of_day(df_orders):
             return "Evening"
 
     df = df_orders.copy()
-    df["time_of_day"] = df["order_purchase_timestamp"].dt.hour.apply(
-        assign_time_of_day
-    )
+    df["time_of_day"] = df["order_purchase_timestamp"].dt.hour.apply(assign_time_of_day)
     df_counts = (
         df["time_of_day"]
         .value_counts()
@@ -94,7 +92,7 @@ def __plot_order_per_time_of_day(df_orders):
     )
 
     # Create plot
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
     plt.bar(
         df_counts.index,
         df_counts.values,
@@ -110,9 +108,7 @@ def __plot_order_per_time_of_day(df_orders):
 
     time_of_day_df = pd.DataFrame(
         {
-            "Time of Day": [
-                "Early Morning", "Morning", "Afternoon", "Evening"
-            ],
+            "Time of Day": ["Early Morning", "Morning", "Afternoon", "Evening"],
             "Time Range": [
                 "0:00 - 5:59",
                 "6:00 - 11:59",
