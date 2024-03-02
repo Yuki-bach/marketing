@@ -1,5 +1,8 @@
 import streamlit as st
-from components.review_score import display_review_score, display_order_count_by_product_category
+from components.EDA.review_score import (
+    display_review_score,
+    display_order_count_by_product_category,
+)
 from utils.dataloader import load_csv_files
 
 
@@ -14,7 +17,9 @@ def main():
         "product_category_name_english"
     ].unique()
     product_category = st.selectbox(
-        "Choose the state for plotting:", product_categories, key="product_category_box"
+        "Choose the product category for plotting:",
+        product_categories,
+        key="product_category_box",
     )
 
     # Set button

@@ -49,8 +49,8 @@ def __display_histogram(df):
         key="frequency",
     )
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(df["Frequency"], bins=bins, edgecolor="k", color="purple")
+    plt.figure(figsize=(8, 4))
+    plt.hist(df["Frequency"], bins=bins, edgecolor="k")
     plt.xlabel("Frequency")
     plt.title("Frequency Distribution")
 

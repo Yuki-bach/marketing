@@ -1,6 +1,6 @@
 import streamlit as st
-from components.recency import display_recency
-from components.frequency import display_frequency
+from components.RFM.recency import display_recency
+from components.RFM.frequency import display_frequency
 from utils.set_favicon import set_favicon
 
 

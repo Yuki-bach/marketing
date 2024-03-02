@@ -21,7 +21,7 @@ def display_order_count_by_state():
 
 def __plot(df_customers_by_state):
     _, ax = plt.subplots(figsize=(6, 2))
-    df_customers_by_state.plot(kind="bar", color="skyblue")
+    df_customers_by_state.plot(kind="bar")
     plt.xticks(rotation=45)
     plt.xlabel("Customer State")
     plt.ylabel("Order Count")

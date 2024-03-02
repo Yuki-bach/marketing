@@ -33,7 +33,7 @@ def display_total_sales_by_state():
 
 def __plot(total_sales_by_state):
     _, ax = plt.subplots(figsize=(6, 2))
-    total_sales_by_state.plot(kind="bar", color="skyblue")
+    total_sales_by_state.plot(kind="bar")
     plt.xticks(rotation=45)
     plt.xlabel("Customer State")
     plt.ylabel("Total Sales (R$)")

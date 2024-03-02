@@ -1,10 +1,25 @@
+import matplotlib.pyplot as plt
 import streamlit as st
+from cycler import cycler
 from utils.set_favicon import set_favicon
+
+# Set color cycle for all plot in this app
+plt.rcParams["axes.prop_cycle"] = cycler(
+    color=[plt.get_cmap("Set2")(i) for i in range(9)]
+)
 
 
 def main():
     set_favicon()
     st.title("ASU DAT490 Capstone Project")
+
+    st.warning(
+        """
+        Rendering charts may take some time.
+        While 'running' is displayed on the top-right corner, your patience would be appreciated.
+        Unexpected behavior or errors may occur.""",
+        icon="⚠️",
+    )
 
     st.header("Dataset")
     st.markdown(

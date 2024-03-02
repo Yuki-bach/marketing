@@ -41,7 +41,7 @@ def __filter_by_state(df_dict, df_orders, state):
 
 def __plot_pie_chart(df_order_payments):
     df_payment_type = df_order_payments["payment_type"].value_counts()
-    plt.figure(figsize=(6, 3))
+    plt.figure(figsize=(8, 4))
     plt.pie(df_payment_type, labels=df_payment_type.index, autopct="%1.1f%%")
     st.pyplot(plt.gcf())
     with st.container(border=True):
@@ -72,14 +72,14 @@ def __plot_line_chart(df):
         .unstack(fill_value=0)
     )
 
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
 
     # Plot a line for each payment type
     for payment_type in df_counts.columns:
         plt.plot(df_counts.index, df_counts[payment_type], lw=2, label=payment_type)
 
     plt.xticks(rotation=45)
-    plt.xlabel("Date")
+    plt.xlabel("Month")
     plt.ylabel("Count")
     plt.legend(title="Payment Type")
     st.pyplot(plt.gcf())
@@ -111,7 +111,7 @@ def __show_credit_card_metrics(df):
 
 
 def __plot_box_plot(df):
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
     payment_types = df["payment_type"].unique()
     payment_values = [
         df.loc[df["payment_type"] == pt, "payment_value"] for pt in payment_types
@@ -122,9 +122,9 @@ def __plot_box_plot(df):
     )
 
     # Set color of boxes
-    colors = ["blue", "orange", "green", "red", "gray"]
+    colors = plt.get_cmap("Set2")
     for i, patch in enumerate(box["boxes"]):
-        patch.set_facecolor(colors[i])
+        patch.set_facecolor(colors(i))
 
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")

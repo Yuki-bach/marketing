@@ -43,7 +43,7 @@ def __plot_order_date(df_orders):
         .unstack(fill_value=0)
     )
 
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
 
     for state in df_counts.columns:
         plt.plot(df_counts.index, df_counts[state], lw=2, label=state)
@@ -68,7 +68,7 @@ def __plot_per_weekday(df_orders):
     )
 
     # Create bar chart
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
 
     df_week_counts.plot(kind="bar", stacked=False, width=0.8)
 
@@ -100,7 +100,7 @@ def __plot_order_per_time_of_day(df_orders):
     df_counts = df_counts.reindex(["Early Morning", "Morning", "Afternoon", "Evening"])
 
     # Create bar chart
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(8, 4))
 
     # Plot a bar for each customer state
     df_counts.plot(kind="bar", stacked=False)

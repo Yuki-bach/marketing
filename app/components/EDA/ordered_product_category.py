@@ -68,8 +68,8 @@ def __merge_df(df_products, df_product_category_name, df_order_items):
 
 
 def __plot(counts_head):
-    plt.figure(figsize=(8, 6))
-    counts_head.plot(kind="bar", color="skyblue")
+    plt.figure(figsize=(8, 4))
+    counts_head.plot(kind="bar")
     plt.xticks(rotation=45)
     plt.xlabel("Product Category")
     plt.ylabel("Count")

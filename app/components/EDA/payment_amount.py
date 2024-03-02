@@ -48,8 +48,8 @@ def __display_histogram(df, slider):
     else:
         bins = 30
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(df["payment_value"], bins=bins, edgecolor="k", color="purple")
+    plt.figure(figsize=(8, 4))
+    plt.hist(df["payment_value"], bins=bins, edgecolor="k")
     plt.xlabel("Payment Value")
     plt.ylabel("Frequency")
     plt.title("Payment Value Distribution")
@@ -59,8 +59,7 @@ def __display_histogram(df, slider):
 
 def __display_box_plot(df):
     plt.figure(figsize=(10, 2))
-    box = plt.boxplot(df["payment_value"], vert=False, patch_artist=True)
-    box["boxes"][0].set_facecolor("purple")  # Set color of box
+    plt.boxplot(df["payment_value"], vert=False, patch_artist=True)
 
     plt.xscale("log")  # Set the x-axis to a logarithmic scale
     plt.xlabel("Payment Value (Log Scale)")  # Update the x-axis label
