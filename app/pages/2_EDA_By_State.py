@@ -9,6 +9,7 @@ from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
 from components.total_sales_by_state import display_total_sales_by_state
+from components.state_names import display_state_names
 from utils.set_favicon import set_favicon
 from utils.eda_headers import get_eda_headers
 
@@ -19,8 +20,12 @@ def main():
     df_dict = load_csv_files()
     df_customers = df_dict["df_customers"]
 
-    display_order_count_by_state()
-    display_total_sales_by_state()
+    col1, col2 = st.columns([5, 2])
+    with col1:
+        display_order_count_by_state()
+        display_total_sales_by_state()
+    with col2:
+        display_state_names()
 
     tab1, tab2 = st.tabs(["State", "Several States"])
     with tab1:
