@@ -1,6 +1,6 @@
 import streamlit as st
 
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 from components.sales import display_sales
 from components.total_order import display_total_order
 from components.order_date_by_states import display_total_order_by_states
@@ -9,15 +9,23 @@ from components.ordered_product_category import display_ordered_product_category
 from components.order_count_by_state import display_order_count_by_state
 from components.payment_amount import display_payment_amount
 from components.total_sales_by_state import display_total_sales_by_state
+from components.state_names import display_state_names
+from utils.set_favicon import set_favicon
+from utils.eda_headers import get_eda_headers
 
 
 def main():
+    set_favicon()
     # Load data
     df_dict = load_csv_files()
     df_customers = df_dict["df_customers"]
 
-    display_order_count_by_state()
-    display_total_sales_by_state()
+    col1, col2 = st.columns([5, 2])
+    with col1:
+        display_order_count_by_state()
+        display_total_sales_by_state()
+    with col2:
+        display_state_names()
 
     tab1, tab2 = st.tabs(["State", "Several States"])
     with tab1:
@@ -29,6 +37,7 @@ def main():
         submit_button = st.button("Show Charts", key="state_btn")
         if submit_button:
             st.toast(f"State name: {state}", icon="🇧🇷")
+            toc(state)
             display_sales(state)
             display_total_order(state)
             display_ordered_product_category(state)
@@ -46,6 +55,22 @@ def main():
         if submit_button:
             st.toast(f"State names: {', '.join(selected_states)}", icon="🇧🇷")
             display_total_order_by_states(selected_states)
+
+
+def toc(state):
+    headers = get_eda_headers()
+
+    toc_md = (
+        "<ul>"
+        + "".join(
+            f'<li><a href="#{header["id"]}-in-{state.lower()}">{header["title"]}</a></li>'
+            for header in headers
+        )
+        + "</ul>"
+    )
+    with st.container(border=True):
+        st.subheader("Table of Contents")
+        st.markdown(toc_md, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":

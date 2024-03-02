@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 def display_sales(state=""):
@@ -48,29 +48,26 @@ def __plot_sales(df):
         df_tmp.groupby("order_purchase_timestamp")["payment_value"].sum().sort_index()
     )
 
-    _, ax1 = plt.subplots(figsize=(20, 10))
+    _, ax1 = plt.subplots(figsize=(8, 4))
 
     # line chart for "payment_value"
     ax1.plot(
         df_total_sales.index,
         df_total_sales.values,
-        label="Total Sales",
+        label="Total Sales (R$ in millions)",
         color="#03A9F4",
     )
-    ax1.set_xlabel("Date")
-    ax1.set_ylabel("Total Sales", color="#03A9F4")
+    ax1.set_xlabel("Month")
+    ax1.set_ylabel("Total Sales (R$ in millions)", color="#03A9F4")
     ax1.tick_params(axis="y")
 
-    # Customize y-axis to display in thousands
-    def thousands_formatter(x, pos):
-        return "%1.0fk" % (x * 1e-3)
+    # Customize y-axis to display in millions
+    def millions_formatter(x, pos):
+        return "%1.01fm" % (x * 1e-6)
 
-    formatter = FuncFormatter(thousands_formatter)
+    formatter = FuncFormatter(millions_formatter)
     ax1.yaxis.set_major_formatter(formatter)
     ax1.set_xticklabels(df_total_sales.index, rotation=45)
-    for i, v in enumerate(df_total_sales.values):
-        label = "{:.1f}k".format(v / 1000)
-        plt.text(i, v + 50, label, ha="center", va="bottom", fontsize=14)
 
     # bar chart for "order_purchase_timestamp"
     ax2 = ax1.twinx()
@@ -84,22 +81,15 @@ def __plot_sales(df):
     ax2.set_ylabel("Order Counts", color="purple")
     ax2.tick_params(axis="y")
 
+    # Customize y-axis to display in millions
+    def thousands_formatter(x, pos):
+        return "%1.0fk" % (x * 1e-3)
+
+    formatter = FuncFormatter(thousands_formatter)
+    ax2.yaxis.set_major_formatter(formatter)
+
     # label for bar chart
     max_count = df_counts.values.max()
-    max_value = df_counts.values.max()
-    offset_value = max_value * 0.07
-    offset_percent = max_value * 0.01
-    total_count = df_counts.values.sum()
-    for i, v in enumerate(df_counts.values):
-        plt.text(i, v + offset_value, str(v), ha="center", va="bottom", fontsize=14)
-        plt.text(
-            i,
-            v + offset_percent,
-            str(round(v / total_count * 100, 2)) + "%",
-            ha="center",
-            va="bottom",
-            fontsize=14,
-        )
     ax2.set_ylim(0, max_count * 2)
 
     # Display legend

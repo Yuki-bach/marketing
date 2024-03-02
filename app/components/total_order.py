@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 # main function
@@ -13,9 +13,6 @@ def display_total_order(state=""):
         df_orders = __filter_by_state(df_dict, df_orders, state)
 
     # Display charts
-    st.title(f'Total Order {"in " + state if state else ""}')
-    __plot_order_date(df_orders)
-
     st.title(f'Total Order per Weekday {"in " + state if state else ""}')
     __plot_per_weekday(df_orders)
 
@@ -34,22 +31,6 @@ def __filter_by_state(df_dict, df_orders, state):
     df_orders = df_orders[df_orders["customer_state"] == state]
     df_orders.drop(columns=["customer_state"], inplace=True)
     return df_orders
-
-
-def __plot_order_date(df_orders):
-    df = df_orders.copy()
-    df["order_purchase_timestamp"] = (
-        df["order_purchase_timestamp"].dt.strftime("%Y/%m")
-    )
-    df_counts = df["order_purchase_timestamp"].value_counts().sort_index()
-
-    # Create plot
-    plt.figure(figsize=(10, 5))
-    plt.plot(df_counts.index, df_counts.values, lw=4)
-    plt.xticks(rotation=45)
-    plt.xlabel("Date")
-    plt.ylabel("Count")
-    st.pyplot(plt.gcf())
 
 
 def __plot_per_weekday(df_orders):

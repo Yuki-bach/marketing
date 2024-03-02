@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
-from dataloader import load_csv_files
+from utils.dataloader import load_csv_files
 
 
 def display_total_sales_by_state():
@@ -27,22 +27,22 @@ def display_total_sales_by_state():
     )
 
     # streamlit
-    st.header("Total Sales by Customer State")
+    st.subheader("Total Sales by Customer State")
     __plot(total_sales_by_state)
 
 
 def __plot(total_sales_by_state):
-    _, ax = plt.subplots(figsize=(8, 4))
+    _, ax = plt.subplots(figsize=(6, 2))
     total_sales_by_state.plot(kind="bar", color="skyblue")
     plt.xticks(rotation=45)
     plt.xlabel("Customer State")
     plt.ylabel("Total Sales (R$)")
     plt.grid(axis="y", linestyle="--", alpha=0.7)
 
-    # Customize y-axis to display in thousands
-    def thousands_formatter(x, pos):
-        return "%1.0fM" % (x * 1e-6)
+    # Customize y-axis to display in millions
+    def millions_formatter(x, pos):
+        return "%1.0fm" % (x * 1e-6)
 
-    formatter = FuncFormatter(thousands_formatter)
+    formatter = FuncFormatter(millions_formatter)
     ax.yaxis.set_major_formatter(formatter)
     st.pyplot(plt.gcf())

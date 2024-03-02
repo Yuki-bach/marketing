@@ -1,0 +1,68 @@
+import pandas as pd
+import streamlit as st
+
+
+def display_state_names():
+    data = {
+        "State": [
+            "SP",
+            "SC",
+            "MG",
+            "PR",
+            "RJ",
+            "RS",
+            "PA",
+            "GO",
+            "ES",
+            "BA",
+            "MA",
+            "MS",
+            "CE",
+            "DF",
+            "RN",
+            "PE",
+            "MT",
+            "AM",
+            "AP",
+            "AL",
+            "RO",
+            "PB",
+            "TO",
+            "PI",
+            "AC",
+            "SE",
+            "RR",
+        ],
+        "State Name": [
+            "São Paulo",
+            "Santa Catarina",
+            "Minas Gerais",
+            "Paraná",
+            "Rio de Janeiro",
+            "Rio Grande do Sul",
+            "Pará",
+            "Goiás",
+            "Espírito Santo",
+            "Bahia",
+            "Maranhão",
+            "Mato Grosso do Sul",
+            "Ceará",
+            "Federal District",
+            "Rio Grande do Norte",
+            "Pernambuco",
+            "Mato Grosso",
+            "Amazonas",
+            "Amapá",
+            "Alagoas",
+            "Rondônia",
+            "Paraíba",
+            "Tocantins",
+            "Piauí",
+            "Acre",
+            "Sergipe",
+            "Roraima",
+        ],
+    }
+
+    df_states = pd.DataFrame(data)
+    st.dataframe(df_states, height=550, hide_index=True)
