@@ -6,6 +6,14 @@ def main():
     set_favicon()
     st.title("ASU DAT490 Capstone Project")
 
+    st.warning(
+        """
+        Rendering charts may take some time.
+        While 'running' is displayed on the top-right corner, your patience would be appreciated.
+        Unexpected behavior or errors may occur.""",
+        icon="⚠️",
+    )
+
     st.header("Dataset")
     st.markdown(
         """
