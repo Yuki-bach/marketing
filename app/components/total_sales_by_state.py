@@ -41,7 +41,7 @@ def __plot(total_sales_by_state):
 
     # Customize y-axis to display in millions
     def millions_formatter(x, pos):
-        return "%1.0fM" % (x * 1e-6)
+        return "%1.0fm" % (x * 1e-6)
 
     formatter = FuncFormatter(millions_formatter)
     ax.yaxis.set_major_formatter(formatter)
