@@ -1,7 +1,7 @@
 import streamlit as st
 
 from utils.dataloader import load_csv_files
-from components.sales import display_sales
+from components.monthly_sales import display_sales
 from components.total_order import display_total_order
 from components.order_date_by_states import display_total_order_by_states
 from components.payment_type import display_payment_type

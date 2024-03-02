@@ -59,7 +59,7 @@ def __display_histogram(df):
     )
 
     plt.figure(figsize=(10, 6))
-    plt.hist(df["Recency"], bins=bins, edgecolor="k", color="purple")
+    plt.hist(df["Recency"], bins=bins, edgecolor="k")
     plt.xlabel("Recency (days)")
     plt.ylabel("Frequency")
     plt.title("Recency Distribution")

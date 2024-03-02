@@ -122,9 +122,9 @@ def __plot_box_plot(df):
     )
 
     # Set color of boxes
-    colors = ["blue", "orange", "green", "red", "gray"]
+    colors = plt.get_cmap("Set2")
     for i, patch in enumerate(box["boxes"]):
-        patch.set_facecolor(colors[i])
+        patch.set_facecolor(colors(i))
 
     plt.boxplot(payment_values, labels=payment_types, vert=True)
     plt.yscale("log")

@@ -9,7 +9,7 @@ def display_sales(state=""):
     df = __get_df(state)
 
     st.title(f'Total Sales {"in " + state if state else ""}')
-    __plot_sales(df)
+    __plot(df)
     __show_sales_metrics(df)
 
 
@@ -38,7 +38,8 @@ def __get_df(state=""):
     return df
 
 
-def __plot_sales(df):
+def __plot(df):
+    # Prepare data
     df_tmp = df.copy()
     df_tmp["order_purchase_timestamp"] = df_tmp["order_purchase_timestamp"].dt.strftime(
         "%Y/%m"
@@ -48,17 +49,32 @@ def __plot_sales(df):
         df_tmp.groupby("order_purchase_timestamp")["payment_value"].sum().sort_index()
     )
 
+    # Create plot
     _, ax1 = plt.subplots(figsize=(8, 4))
+    __plot_line_chart(ax1, df_total_sales)
+    ax2 = ax1.twinx()
+    __plot_bar_chart(ax2, df_counts)
 
-    # line chart for "payment_value"
+    # Display legend
+    lines, labels = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax2.legend(lines + lines2, labels + labels2, loc="upper left")
+
+    # Display plot in Streamlit
+    st.pyplot(plt.gcf())
+
+
+def __plot_line_chart(ax1, df_total_sales):
+    color1 = plt.get_cmap("Set2")(0)
+
     ax1.plot(
         df_total_sales.index,
         df_total_sales.values,
         label="Total Sales (R$ in millions)",
-        color="#03A9F4",
+        color=color1,
     )
     ax1.set_xlabel("Month")
-    ax1.set_ylabel("Total Sales (R$ in millions)", color="#03A9F4")
+    ax1.set_ylabel("Total Sales (R$ in millions)", color=color1)
     ax1.tick_params(axis="y")
 
     # Customize y-axis to display in millions
@@ -69,16 +85,18 @@ def __plot_sales(df):
     ax1.yaxis.set_major_formatter(formatter)
     ax1.set_xticklabels(df_total_sales.index, rotation=45)
 
-    # bar chart for "order_purchase_timestamp"
-    ax2 = ax1.twinx()
+
+def __plot_bar_chart(ax2, df_counts):
+    color2 = plt.get_cmap("Set2")(1)
+
     ax2.bar(
         df_counts.index,
         df_counts.values,
         alpha=0.5,
         label="Order Counts",
-        color="purple",
+        color=color2,
     )
-    ax2.set_ylabel("Order Counts", color="purple")
+    ax2.set_ylabel("Order Counts", color=color2)
     ax2.tick_params(axis="y")
 
     # Customize y-axis to display in millions
@@ -91,14 +109,6 @@ def __plot_sales(df):
     # label for bar chart
     max_count = df_counts.values.max()
     ax2.set_ylim(0, max_count * 2)
-
-    # Display legend
-    lines, labels = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax2.legend(lines + lines2, labels + labels2, loc="upper left")
-
-    # Display plot in Streamlit
-    st.pyplot(plt.gcf())
 
 
 def __show_sales_metrics(df):

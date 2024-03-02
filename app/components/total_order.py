@@ -1,7 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
+from cycler import cycler
 from utils.dataloader import load_csv_files
+
+# Set color cycle for the plot
+plt.rcParams['axes.prop_cycle'] = cycler(
+    color=[plt.get_cmap('Set2')(i) for i in range(9)]
+)
 
 
 # main function
@@ -92,7 +98,6 @@ def __plot_order_per_time_of_day(df_orders):
     plt.bar(
         df_counts.index,
         df_counts.values,
-        color=["blue", "orange", "green", "red"]
     )
     plt.xlabel("Time of Day")
     plt.ylabel("Count")
