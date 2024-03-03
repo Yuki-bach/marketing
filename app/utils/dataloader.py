@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 
-@st.cache_data
+@st.cache_data(ttl="1d")
 def load_csv_files():
     df_dict = {}
     for key, path in csv_files.items():
