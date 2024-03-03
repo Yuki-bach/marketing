@@ -31,6 +31,8 @@ def __filter_by_state(df_dict, df_orders, states):
         on="customer_id",
     )
     df_orders = df_orders[df_orders["customer_state"].isin(states)]
+    df_orders['customer_state'] = df_orders['customer_state'].cat.set_categories(states)
+
     return df_orders
 
 
