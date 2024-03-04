@@ -43,16 +43,8 @@ def get_df_frequency(df_orders, df_customers):
 
 
 def __display_histogram(df):
-    bins = st.slider(
-        "Select the number of bins",
-        min_value=1,
-        max_value=50,
-        value=10,
-        key="frequency",
-    )
-
     plt.figure(figsize=(8, 4))
-    plt.hist(df["Frequency"], bins=bins, edgecolor="k")
+    plt.hist(df["Frequency"], bins=30, edgecolor="k")
     plt.xlabel("Frequency")
     plt.title("Frequency Distribution")
 
