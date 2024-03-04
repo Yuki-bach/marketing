@@ -22,7 +22,7 @@ def main():
     )
 
     st.header("Introduction")
-    st.caption(
+    st.write(
         """
         This exploratory data analysis provides an overview of visualizations that present the key metrics and trends of this dataset.
         This includes the total sales revenue, order volumes, distribution of payment types,
@@ -33,7 +33,7 @@ def main():
         Furthermore, it scrutinizes the sales performance and consumer preferences associated with each specific product category,
         showing insights on variations in demand, pricing strategies, and market trends.
 
-        This dataset is structured as a relational database, consisting of multiple dataset files, each with linking ID codes that connect the information of the products, customers, and sellers among different tables. We merged the ordered items, order payments, order reviews, products, customer information, and seller information into one table. The table contains key information important for analysis, such as product types and descriptions, price, customer location, seller location, and more. 
+        This dataset is structured as a relational database, consisting of multiple dataset files, each with linking ID codes that connect the information of the products, customers, and sellers among different tables. We merged the ordered items, order payments, order reviews, products, customer information, and seller information into one table. The table contains key information important for analysis, such as product types and descriptions, price, customer location, seller location, and more.
         Although there are many null and repeat values, those will be easy to handle and clean up. For the null values, if it is a quantity, we would place them as 0 as it is possible that there could not be enough information on sales to get the true picture for it. This should not be a problem as most missing values are not in the vital quantity columns. For textual entries, such as review information and dates, we will leave them blank or have a sign indicating nothing as those entries may not be as important to the analysis. As for duplicates, we will remove them from the dataset as it could lead to inaccurate results.
 
             """)
