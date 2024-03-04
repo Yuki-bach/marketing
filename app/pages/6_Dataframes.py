@@ -1,7 +1,5 @@
-import os
 import pandas as pd
 import streamlit as st
-from PIL import Image
 from utils.dataloader import load_csv_files
 from utils.image_utils import get_image
 from utils.set_favicon import set_favicon
