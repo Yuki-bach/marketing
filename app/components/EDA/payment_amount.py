@@ -16,8 +16,7 @@ def display_payment_amount(state=""):
 
     # Display charts
     st.title(f'Payment Amount {"in " + state if state else ""}')
-    need_slider = state == ""
-    __display_histogram(df, slider=need_slider)
+    __display_histogram(df)
     cap_payment_amount()
     __display_box_plot(df)
 
@@ -42,16 +41,9 @@ def __filter_df(df_dict, df, state):
     return df
 
 
-def __display_histogram(df, slider):
-    if slider:
-        bins = st.slider(
-            "Select the number of bins", min_value=1, max_value=50, value=10
-        )
-    else:
-        bins = 30
-
+def __display_histogram(df):
     plt.figure(figsize=(8, 4))
-    plt.hist(df["payment_value"], bins=bins, edgecolor="k")
+    plt.hist(df["payment_value"], bins=50, edgecolor="k")
     plt.xlabel("Payment Value")
     plt.ylabel("Frequency")
     plt.title("Payment Value Distribution")

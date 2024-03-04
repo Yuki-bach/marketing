@@ -27,6 +27,7 @@ def display_ordered_product_category(state=""):
     st.write(f"There are {category_num} categories in total.")
     st.pyplot(plt.gcf())
     cap_top10_ordered_product_categories()
+    st.write("Other categories:")
     st.dataframe(counts, height=200)
 
 

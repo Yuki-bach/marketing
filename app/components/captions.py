@@ -4,14 +4,14 @@ import streamlit as st
 # EDA Overview
 def cap_total_sales():
     text = """
-        This bar chart displays the total sales and total count of orders overall by each month of the year 09/2016 to 10/2018. Due to some missing values in the data, some months have a very low or no number for the value. The Brazilian real (BRL) is the official currency used in Brazil, and the representation of it is R$.
+        This bar chart displays the total sales and total count of orders overall by each month of the year 09/2016 to 10/2018. Due to some missing values in the data, some months have a very low or no number for the value. The Brazilian real (BRL) is the official currency used in Brazil, and the representation of it is R$. There was a significant decline observed from August 2018 to September 2018, which could potentially be attributed to data noise. To facilitate a more accurate comparison between 2017 and 2018, it is advisable to focus on the data pertaining to orders placed from January through August for both years.
     """
     st.write(text)
 
 
 def cap_total_order_per_week():
     text = """
-        The bar chart illustrates the distribution of total orders across different weekdays, encompassing all orders recorded over the entire duration of the dataset. Each bar represents the cumulative count of orders placed on a specific weekday.
+        The bar chart illustrates the distribution of total orders across different weekdays, encompassing all orders recorded over the entire duration of the dataset. Each bar represents the cumulative count of orders placed on a specific weekday. Surprisingly, it was observed that there were variations in the number of orders based on the day of the week, suggesting the potential inclusion of the day of the week as a feature in the analysis.
     """
     st.write(text)
 
@@ -32,7 +32,7 @@ def cap_top10_ordered_product_categories():
 
 def cap_payment_amount():
     text = """
-        The bar chart, depicting payment amounts grouped into customizable bins, showcases the distribution of payment values by frequency, offering a visual representation of the frequency distribution across different payment value ranges. This is complemented by a box plot, providing a concise summary of the payment amount's central tendency, dispersion, and presence of outliers within the dataset.
+        The bar chart showcases the distribution of payment values by frequency, offering a visual representation of the frequency distribution across different payment value ranges. This is complemented by a box plot, providing a concise summary of the payment amount's central tendency, dispersion, and presence of outliers within the dataset.
     """
     st.write(text)
 
@@ -127,6 +127,6 @@ def cap_recency():
 
 def cap_frequency():
     text = """
-        The bar graph visualizes the frequency distribution derived from an RFM (Recency, Frequency, Monetary) analysis. Equipped with a slider, users can adjust the number of bins to customize the granularity of the analysis. The x-axis represents the frequency of customer transactions, while the height of each bar indicates the frequency of customers falling within each bin.
+        The bar graph visualizes the frequency distribution derived from an RFM (Recency, Frequency, Monetary) analysis. The frequency plot presented indicates a highly skewed distribution of customer transactions towards the lower frequency range. The most noticeable aspect of the distribution is that the majority of customers have only a single transaction.The data highlights the potential need for strategies to increase customer retention and encourage repeat purchases.
     """
     st.write(text)
