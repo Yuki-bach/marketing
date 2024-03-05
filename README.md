@@ -5,6 +5,15 @@
 ## EDA Dashboard
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dat490-marketing.streamlit.app/)
 
+## How to Run Streamlit in Local Environment
+```
+1. Install streamlit
+$ pip install streamlit
+
+2. run streamlit
+$ streamlit run app/main.py
+```
+
 ## Git Cheat Sheet for Team Collaboration
 
 ```
