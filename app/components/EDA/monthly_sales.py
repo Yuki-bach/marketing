@@ -64,6 +64,7 @@ def __plot(df):
 
     # Display plot in Streamlit
     st.pyplot(plt.gcf())
+    plt.close()
 
 
 def __plot_line_chart(ax1, df_total_sales):

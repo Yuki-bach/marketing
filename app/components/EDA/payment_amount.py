@@ -48,7 +48,8 @@ def __display_histogram(df):
     plt.ylabel("Frequency")
     plt.title("Payment Value Distribution")
 
-    st.pyplot(plt)
+    st.pyplot(plt.gcf())
+    plt.close()
 
 
 def __display_box_plot(df):
@@ -61,3 +62,4 @@ def __display_box_plot(df):
 
     # Display the box plot
     st.pyplot(plt.gcf())
+    plt.close()

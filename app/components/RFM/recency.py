@@ -66,4 +66,5 @@ def __display_histogram(df):
     plt.ylabel("Frequency")
     plt.title("Recency Distribution")
 
-    st.pyplot(plt)
+    st.pyplot(plt.gcf())
+    plt.close()

@@ -67,6 +67,7 @@ def __plot_per_weekday(df_orders):
     for i, v in enumerate(df_week_counts.values):
         plt.text(i, v + offset_value, str(v), ha="center", va="bottom")
     st.pyplot(plt.gcf())
+    plt.close()
 
 
 def __plot_order_per_time_of_day(df_orders):
@@ -102,6 +103,7 @@ def __plot_order_per_time_of_day(df_orders):
     for i, v in enumerate(df_counts.values):
         plt.text(i, v + offset_value, str(v), ha="center", va="bottom")
     st.pyplot(plt.gcf())
+    plt.close()
 
     time_of_day_df = pd.DataFrame(
         {

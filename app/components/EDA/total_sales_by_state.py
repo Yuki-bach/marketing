@@ -47,4 +47,6 @@ def __plot(total_sales_by_state):
 
     formatter = FuncFormatter(millions_formatter)
     ax.yaxis.set_major_formatter(formatter)
+    
     st.pyplot(plt.gcf())
+    plt.close()
