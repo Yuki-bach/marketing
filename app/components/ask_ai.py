@@ -2,6 +2,7 @@ import base64
 import io
 import os
 import streamlit as st
+import matplotlib.pyplot as plt
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -15,15 +16,18 @@ os.environ["OPENAI_API_KEY"] = (
 client = OpenAI()
 
 
-def ask_ai(fig):
+def ask_ai(fig=None):
     if st.button("Ask AI"):
         image_base64 = __convert_plot_to_base64(fig)
         __call_api_and_display_answer(image_base64)
 
 
-def __convert_plot_to_base64(fig):
+def __convert_plot_to_base64(fig=None):
     buf = io.BytesIO()
-    fig.savefig(buf, format="png", bbox_inches="tight")
+    if fig:
+        fig.savefig(buf, format="png", bbox_inches="tight")
+    else:
+        plt.savefig(buf, format="png", bbox_inches="tight")
     buf.seek(0)
     image_base64 = base64.b64encode(buf.read()).decode("utf-8")
     buf.close()
