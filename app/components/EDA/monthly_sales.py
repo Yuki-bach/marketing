@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from matplotlib.ticker import FuncFormatter
 from components.captions import cap_total_sales
+from components.ask_ai import ask_ai
 from utils.dataloader import load_csv_files
 
 
@@ -52,7 +53,7 @@ def __plot(df):
     )
 
     # Create plot
-    _, ax1 = plt.subplots(figsize=(8, 4))
+    fig, ax1 = plt.subplots(figsize=(8, 4))
     __plot_line_chart(ax1, df_total_sales)
     ax2 = ax1.twinx()
     __plot_bar_chart(ax2, df_counts)
@@ -64,6 +65,9 @@ def __plot(df):
 
     # Display plot in Streamlit
     st.pyplot(plt.gcf())
+
+    # ask ai
+    ask_ai(fig)
 
 
 def __plot_line_chart(ax1, df_total_sales):
