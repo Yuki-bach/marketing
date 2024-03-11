@@ -38,7 +38,7 @@ def main():
 
             """
     )
-    st.page_link("pages/merge_df.py", label="The code that merges dataframes", icon="📄")
+    st.page_link("pages/merge_dataframes.py", label="The code that merges dataframes", icon="📄")
 
     st.header("Dataset")
     st.markdown(
