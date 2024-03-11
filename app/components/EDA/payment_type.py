@@ -47,7 +47,10 @@ def __plot_pie_chart(df_order_payments):
     df_payment_type = df_order_payments["payment_type"].value_counts()
     plt.figure(figsize=(8, 4))
     plt.pie(df_payment_type, labels=df_payment_type.index, autopct="%1.1f%%")
+
     st.pyplot(plt.gcf())
+    plt.close()
+
     with st.container(border=True):
         st.markdown(
             """
@@ -86,7 +89,9 @@ def __plot_line_chart(df):
     plt.xlabel("Month")
     plt.ylabel("Count")
     plt.legend(title="Payment Type")
+
     st.pyplot(plt.gcf())
+    plt.close()
 
 
 def __show_credit_card_metrics(df):
@@ -134,4 +139,6 @@ def __plot_box_plot(df):
     plt.yscale("log")
     plt.xlabel("Payment Type")
     plt.ylabel("Price (Log)")
+
     st.pyplot(plt.gcf())
+    plt.close()
