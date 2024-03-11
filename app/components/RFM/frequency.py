@@ -48,5 +48,4 @@ def __display_histogram(df):
     plt.xlabel("Frequency")
     plt.title("Frequency Distribution")
 
-    st.pyplot(plt.gcf())
-    plt.close()
+    st.pyplot(plt)

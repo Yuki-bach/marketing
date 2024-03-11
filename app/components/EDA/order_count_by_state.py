@@ -18,7 +18,6 @@ def display_order_count_by_state():
     # streamlit
     st.subheader("Order Count by Customer State")
     st.pyplot(plt.gcf())
-    plt.close()
     cap_order_count_by_customer_state()
 
 

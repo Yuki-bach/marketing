@@ -80,7 +80,6 @@ def __plot_bar_chart(df, product_category):
         f'Distribution of Review Scores {"for " + product_category if product_category else ""}'
     )
     st.pyplot(plt.gcf())
-    plt.close()
 
 
 def __plot_bar_chart_order_count_by_product_category(df):
@@ -108,4 +107,3 @@ def __plot_bar_chart_order_count_by_product_category(df):
 
     # streamlit
     st.pyplot(plt.gcf())
-    plt.close()

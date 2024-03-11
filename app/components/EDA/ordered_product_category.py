@@ -25,10 +25,7 @@ def display_ordered_product_category(state=""):
     # Display using streamlit
     st.title(f"Top 10 Ordered Product Categories  {'in ' + state if state else ''}")
     st.write(f"There are {category_num} categories in total.")
-    
     st.pyplot(plt.gcf())
-    plt.close()
-
     cap_top10_ordered_product_categories()
     st.write("Other categories:")
     st.dataframe(counts, height=200)
