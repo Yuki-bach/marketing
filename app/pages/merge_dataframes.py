@@ -14,7 +14,7 @@ def main():
     df_summary = __resumetable(df_train)
     st.write(f"Dataset Shape: {df_train.shape}")
     st.subheader("df_train Summary:")
-    st.write(df_summary)
+    st.dataframe(df_summary, height=600)
 
 
 def __display_merging_code():
