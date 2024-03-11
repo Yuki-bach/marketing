@@ -56,7 +56,6 @@ def __plot_order_date(df_orders):
     plt.legend(title="Customer State", bbox_to_anchor=(1.05, 1), loc="upper left")
 
     st.pyplot(plt.gcf())
-    plt.close()
 
 
 def __plot_per_weekday(df_orders):
@@ -81,7 +80,6 @@ def __plot_per_weekday(df_orders):
     plt.title("Orders per Weekday by Customer State")
 
     st.pyplot(plt.gcf())
-    plt.close()
 
 
 def __plot_order_per_time_of_day(df_orders):
@@ -112,9 +110,7 @@ def __plot_order_per_time_of_day(df_orders):
     plt.xlabel("Time of Day")
     plt.ylabel("Count")
     plt.xticks(rotation=45)
-    
     st.pyplot(plt.gcf())
-    plt.close()
 
     time_of_day_df = pd.DataFrame(
         {
