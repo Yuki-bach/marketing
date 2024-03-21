@@ -1,0 +1,122 @@
+[
+  {
+    "column": "customer_unique_id",
+    "source": "df_customers",
+    "description": "PK"
+  },
+  {
+    "column": "customer_zip_code_prefix",
+    "source": "df_customers",
+    "description": ""
+  },
+  {
+    "column": "customer_city",
+    "source": "df_customers",
+    "description": ""
+  },
+  {
+    "column": "customer_state",
+    "source": "df_customers",
+    "description": ""
+  },
+  {
+    "column": "fo_order_id",
+    "source": "df_orders",
+    "description": "FK"
+  },
+  {
+    "column": "fo_customer_id",
+    "source": "df_orders",
+    "description": "FK (first order's customer_id)"
+  },
+  {
+    "column": "fo_order_status",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_order_purchase_timestamp",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_order_approved_at",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_order_delivered_carrier_date",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_order_delivered_customer_date",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_order_estimated_delivery_date",
+    "source": "df_orders",
+    "description": ""
+  },
+  {
+    "column": "fo_is_daytime",
+    "source": "Calculated",
+    "description": "1:9-23, 0:0-8"
+  },
+  {
+    "column": "fo_is_weekday",
+    "source": "Calculated",
+    "description": "1:weekday, 0:weekend"
+  },
+  {
+    "column": "frequency",
+    "source": "Calculated",
+    "description": "number of orders"
+  },
+  {
+    "column": "recency",
+    "source": "Calculated",
+    "description": "# of days after the last order"
+  },
+  {
+    "column": "monetary",
+    "source": "Calculated",
+    "description": "total payment amount"
+  },
+  {
+    "column": "repeater",
+    "source": "Calculated",
+    "description": "1:repeater, 0:non-repeater"
+  },
+  {
+    "column": "fo_delivery_delay_days",
+    "source": "Calculated",
+    "description": ">0:delay, <0:ahead"
+  },
+  {
+    "column": "fo_voucher_used",
+    "source": "Calculated",
+    "description": "1:used, 2:non-used"
+  },
+  {
+    "column": "fo_review_score_mean",
+    "source": "df_order_reviews",
+    "description": ""
+  },
+  {
+    "column": "fo_voucher_payment_value",
+    "source": "df_order_payments",
+    "description": ""
+  },
+  {
+    "column": "fo_product_category_name",
+    "source": "df_product_category_name",
+    "description": ""
+  },
+  {
+    "column": "fo_payment_value",
+    "source": "df_order_payments",
+    "description": ""
+  }
+]
