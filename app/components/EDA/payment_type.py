@@ -1,8 +1,14 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import streamlit as st
-from components.captions import cap_payment_type, cap_evolution_of_payment_type, order_price_by_payment_type
 from utils.dataloader import load_csv_files
+from components.captions import (
+    cap_payment_type,
+    cap_evolution_of_payment_type,
+    order_price_by_payment_type,
+    cap_evolution_of_payment_type_as_percent
+)
 
 
 # main function
@@ -24,6 +30,11 @@ def display_payment_type(state=""):
     __plot_line_chart(df)
     __show_credit_card_metrics(df)
     cap_evolution_of_payment_type()
+
+    st.title(f'Evolution of Payment Type as Percentages {"in " + state if state else ""}')
+    __plot_stacked_bar_chart(df)
+    cap_evolution_of_payment_type_as_percent()
+
 
     st.title(f'Order Price by Payment Type {"in " + state if state else ""}')
     __plot_box_plot(df)
@@ -113,6 +124,29 @@ def __show_credit_card_metrics(df):
             delta=f"{total_count_2018 / total_count_2017 * 100:.2f}%",
         )
 
+def __plot_stacked_bar_chart(df):
+  df_counts = (
+    df.groupby(["order_purchase_timestamp", "payment_type"])
+    .size()
+    .unstack(fill_value=0)
+  )
+
+  percentages = df_counts.div(df_counts.sum(axis=1), axis=0)
+  cumulative = np.zeros(len(df_counts))
+
+  plt.figure(figsize=(8, 4))
+
+  # Plot a bar for each payment type
+  for payment_type in percentages.columns:
+    plt.bar(df_counts.index, percentages[payment_type], bottom=cumulative, label=payment_type)
+    cumulative += percentages[payment_type]
+
+  plt.xticks(rotation=45)
+  plt.xlabel("Month")
+  plt.ylabel("Percentage")
+  plt.legend(title="Payment Type")
+  plt.ylim(0, 1)
+  st.pyplot(plt.gcf())
 
 def __plot_box_plot(df):
     plt.figure(figsize=(8, 4))

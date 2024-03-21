@@ -65,4 +65,4 @@ def display_state_names():
     }
 
     df_states = pd.DataFrame(data)
-    st.dataframe(df_states, height=860, hide_index=True)
+    st.dataframe(df_states, height=1000, hide_index=True)

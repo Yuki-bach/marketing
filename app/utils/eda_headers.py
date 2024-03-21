@@ -11,6 +11,7 @@ def get_eda_headers():
         {"id": "payment-amount", "title": "Payment Amount"},
         {"id": "payment-type", "title": "Payment Type"},
         {"id": "evolution-of-payment-type", "title": "Evolution of Payment Type"},
+        {"id": "evolution-of-payment-type-as-percentages", "title": "Evolution of Payment Type as Percentages"},
         {"id": "order-price-by-payment-type", "title": "Order Price by Payment Type"},
         {
             "id": "distribution-of-review-scores",

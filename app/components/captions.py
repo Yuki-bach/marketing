@@ -51,6 +51,13 @@ def cap_evolution_of_payment_type():
     st.write(text)
 
 
+def cap_evolution_of_payment_type_as_percent():
+    text = """
+        As indicated by the previous plot, the data for the first and last 2-3 months is extremely limited, so it will be disregarded. Excluding those, the proportions of payment types have remained relatively unchanged. This suggests that there hasn’t been a significant shift in customer payment type preferences over the course of a year and a half, which is not particularly surprising.
+    """
+    st.write(text)
+
+
 def order_price_by_payment_type():
     text = """
         The whisker box plot visually presents the distribution of order prices across different payment types, providing insights into the variability and central tendency of order prices within each payment method category. By displaying key statistical metrics such as median, quartiles, and outliers, the box plot aids in identifying any significant disparities or trends in order pricing across various payment methods.
