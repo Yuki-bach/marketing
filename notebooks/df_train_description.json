@@ -77,7 +77,7 @@
   {
     "column": "recency",
     "source": "Calculated",
-    "description": "days after the last order"
+    "description": "# of days after the last order"
   },
   {
     "column": "monetary",
