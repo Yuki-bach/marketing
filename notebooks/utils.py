@@ -41,3 +41,26 @@ def normalize(df):
     df_scaled = scaler.fit_transform(df)
     df_normalized = pd.DataFrame(df_scaled, columns=df.columns)
     return df_normalized
+
+
+def get_comparison_df(df_numeric, centroids_df):
+    if df_numeric.select_dtypes(include=[np.number]).shape[1] != df_numeric.shape[1]:
+        raise ValueError('Dataframe contains non-numeric columns')
+
+    ## get means and medians
+    means = df_numeric.mean()
+    medians = df_numeric.median()
+
+    ## create centroids comparison dataframe
+    data_for_df = {
+        'Feature': df_numeric.columns
+    }
+
+    for i in range(centroids_df.shape[0]):
+        data_for_df[f'cl{i+1}_centroid'] = centroids_df.iloc[i].values
+
+    centroids_comparison_df = pd.DataFrame(data_for_df)
+    centroids_comparison_df['Data Mean'] = means.values
+    centroids_comparison_df['Data Median'] = medians.values
+
+    return centroids_comparison_df
