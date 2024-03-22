@@ -25,22 +25,36 @@ def get_df_description(df, description_json_df):
 
 
 def standardize(df):
-    if df.select_dtypes(include=[np.number]).shape[1] != df.shape[1]:
-        raise ValueError('Dataframe contains non-numeric columns')
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    cols_to_scale = [col for col in numeric_cols if not is_binary_column(df[col])]
+
+    if len(cols_to_scale) == 0:
+        raise ValueError('No columns to standardize')
 
     scaler = StandardScaler()
-    df_scaled = scaler.fit_transform(df)
-    df_standardized = pd.DataFrame(df_scaled, columns=df.columns)
-    return df_standardized
+    df_scaled = df.copy()
+    df_scaled[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
+
+    return df_scaled
 
 
 def normalize(df):
-    if df.select_dtypes(include=[np.number]).shape[1] != df.shape[1]:
-        raise ValueError('Dataframe contains non-numeric columns')
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    cols_to_scale = [col for col in numeric_cols if not is_binary_column(df[col])]
+
+    if len(cols_to_scale) == 0:
+        raise ValueError('No columns to normalize')
+
     scaler = MinMaxScaler()
-    df_scaled = scaler.fit_transform(df)
-    df_normalized = pd.DataFrame(df_scaled, columns=df.columns)
-    return df_normalized
+    df_scaled = df.copy()
+    df_scaled[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
+
+    return df_scaled
+
+
+def is_binary_column(column):
+    unique_values = np.unique(column)
+    return len(unique_values) == 2 and np.all(unique_values == [0, 1])
 
 
 def get_comparison_df(df_numeric, centroids_df):
