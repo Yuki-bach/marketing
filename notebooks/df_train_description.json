@@ -20,6 +20,11 @@
     "description": ""
   },
   {
+    "column": "customer_in_sao_paulo",
+    "source": "Calculated",
+    "description": "1:in Sao Paulo, 0:non-Sao Paulo"
+  },
+  {
     "column": "fo_order_id",
     "source": "df_orders",
     "description": "FK"
@@ -97,7 +102,7 @@
   {
     "column": "fo_voucher_used",
     "source": "Calculated",
-    "description": "1:used, 2:non-used"
+    "description": "1:used, 0:non-used"
   },
   {
     "column": "fo_review_score_mean",
