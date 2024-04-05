@@ -10,6 +10,7 @@ from components.EDA.order_count_by_state import display_order_count_by_state
 from components.EDA.payment_amount import display_payment_amount
 from components.EDA.total_sales_by_state import display_total_sales_by_state
 from components.EDA.state_names import display_state_names
+from components.EDA.brazil_state_map import display_brazil_state_map
 from utils.set_favicon import set_favicon
 from utils.eda_headers import get_eda_headers
 
@@ -24,6 +25,7 @@ def main():
     with col1:
         display_order_count_by_state()
         display_total_sales_by_state()
+        display_brazil_state_map()
     with col2:
         display_state_names()
 
