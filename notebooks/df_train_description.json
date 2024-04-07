@@ -90,6 +90,11 @@
     "description": "total payment amount"
   },
   {
+    "column": "rfm_score",
+    "source": "Calculated",
+    "description": "using k-means. (0-3)"
+  },
+  {
     "column": "repeater",
     "source": "Calculated",
     "description": "1:repeater, 0:non-repeater"
