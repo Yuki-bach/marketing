@@ -14,13 +14,6 @@ $ pip install streamlit
 $ streamlit run app/main.py
 ```
 
-## Datasets folder
-- `eda.ipynb` - Our first EDA notebook (it's not used now)
-- `feature_engineering.ipynb` - Create new features, and save in datasets/df_train.csv
-- `methodology_kmeans.ipynb` - for methodology submission assignment
-- `methodology_dbscan.ipynb` - for methodology submission assignment
-- `rfm_analysis.ipynb` - Create clusters for each RFM columns, and then create the overall score
-
 ## Git Cheat Sheet for Team Collaboration
 
 ```
